@@ -1,3 +1,8 @@
+import Page from '../layout/Page';
+import Landing from '../components/Landing';
+
 export default () => (
-  <div>Hello World.</div>
+  <Page>
+    <Landing />
+  </Page>
 )

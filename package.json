@@ -1,14 +1,17 @@
 {
   "name": "duelour-web",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "repository": "https://github.com/duelour/duelour-web",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start"
   },
+  "license": "MIT",
   "dependencies": {
     "next": "*",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "styled-components": "^1.4.4"
   }
 }
