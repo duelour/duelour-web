@@ -1,6 +1,6 @@
 # Duelour Web
 
-> The web interface for Duelour.
+> 👊🌎 The web interface for Duelour.
 
 ## Install
 
