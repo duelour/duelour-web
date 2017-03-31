@@ -1,5 +1,5 @@
-import Page from '../layout/Page';
 import Landing from '../components/Landing';
+import Page from '../layout/Page';
 
 export default () => (
   <Page>
