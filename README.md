@@ -7,6 +7,7 @@
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account.
 2. [Clone](https://help.github.com/articles/cloning-a-repository/) the repository.
 3. `cd duelour-web`
+4. `yarn`
 
 ## Usage
 
