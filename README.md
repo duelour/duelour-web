@@ -1,5 +1,7 @@
 # Duelour Web
 
+[![CircleCI](https://circleci.com/gh/duelour/duelour-web/tree/master.svg?style=shield)](https://circleci.com/gh/duelour/duelour-web/tree/master)
+
 > 👊🌎 The web interface for Duelour.
 
 ## Install
