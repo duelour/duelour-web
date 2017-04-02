@@ -8,7 +8,7 @@ deployment:
     branch: master
     commands:
       - ./internals/deploy.sh prod
-  development:
+  staging:
     branch: development
     commands:
       - ./internals/deploy.sh dev
