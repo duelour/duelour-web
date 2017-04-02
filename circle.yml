@@ -10,9 +10,12 @@ deployment:
   production:
     branch: master
     commands:
+      - cp ./internals/now.prod.json now.json
       - now -t $NOW_TOKEN
-      # - cd internals && sudo bash ./deploy.sh prod
+      - now alias
   staging:
     branch: development
     commands:
-      - cd internals && sudo bash ./deploy.sh dev
+      - cp ./internals/now.dev.json now.json
+      - now -t $NOW_TOKEN
+      - now alias
