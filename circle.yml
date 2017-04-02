@@ -12,10 +12,10 @@ deployment:
     commands:
       - cp ./internals/now.prod.json now.json
       - now -t $NOW_TOKEN
-      - now alias
+      - now alias -t $NOW_TOKEN
   staging:
     branch: development
     commands:
       - cp ./internals/now.dev.json now.json
       - now -t $NOW_TOKEN
-      - now alias
+      - now alias -t $NOW_TOKEN
