@@ -7,7 +7,8 @@ deployment:
   production:
     branch: master
     commands:
-      - cd internals && sudo bash ./deploy.sh prod
+      - now
+      # - cd internals && sudo bash ./deploy.sh prod
   staging:
     branch: development
     commands:
