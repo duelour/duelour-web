@@ -3,11 +3,14 @@ machine:
     Australia/Melbourne
   node:
     version: 7.8.0
+dependencies:
+  pre:
+    - npm install now -g
 deployment:
   production:
     branch: master
     commands:
-      - now
+      - now -t $NOW_TOKEN
       # - cd internals && sudo bash ./deploy.sh prod
   staging:
     branch: development
