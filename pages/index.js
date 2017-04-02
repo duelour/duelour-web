@@ -1,8 +1,8 @@
-import Landing from '../components/Landing';
-import Page from '../layout/Page';
+import Landing from '../components/landing';
+import Page from '../document/page';
 
 export default () => (
   <Page>
-    <Landing />
+    <Landing/>
   </Page>
-)
+);

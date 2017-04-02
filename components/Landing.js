@@ -1,6 +1,6 @@
 export default () => (
   <div className="wrapper">
-    <img src="/static/boxing.png" width="300px" />
+    <img src="/static/boxing.png" width="300px"/>
     <div className="title-wrapper">
       <div className="title">Duelour</div>
     </div>
@@ -32,4 +32,4 @@ export default () => (
       }
     `}</style>
   </div>
-)
+);
