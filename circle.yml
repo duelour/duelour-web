@@ -7,8 +7,8 @@ deployment:
   production:
     branch: master
     commands:
-      - ./internals/deploy.sh prod
+      - sudo ./internals/deploy.sh prod
   staging:
     branch: development
     commands:
-      - ./internals/deploy.sh dev
+      - sudo ./internals/deploy.sh dev
