@@ -7,10 +7,6 @@ deployment:
   production:
     branch: master
     commands:
-      - npm install now
-      - cd node_modules
-      - ls
-      - cd ../
       - cd internals && sudo bash ./deploy.sh prod
   staging:
     branch: development
