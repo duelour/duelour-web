@@ -7,8 +7,12 @@ deployment:
   production:
     branch: master
     commands:
-      - cd internals && sudo sh ./deploy.sh prod
+      - cd internals
+      - sudo chmod +x ./deploy.sh
+      - ./deploy.sh prod
   staging:
     branch: development
     commands:
-      - cd internals && sudo sh ./internals/deploy.sh dev
+      - cd internals
+      - sudo chmod +x ./deploy.sh
+      - ./deploy.sh dev
