@@ -1,5 +1,6 @@
 # Duelour Web
 
+[![Code Climate](https://codeclimate.com/github/duelour/duelour-web.png)](https://codeclimate.com/github/duelour/duelour-web)
 [![CircleCI](https://circleci.com/gh/duelour/duelour-web/tree/master.svg?style=shield)](https://circleci.com/gh/duelour/duelour-web/tree/master)
 
 > 👊🌎 The web interface for Duelour.
