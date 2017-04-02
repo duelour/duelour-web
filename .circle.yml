@@ -1,0 +1,14 @@
+machine:
+  timezone:
+    Australia/Melbourne
+  node:
+    version: 7.8.0
+deployment:
+  production:
+    branch: master
+    commands:
+      - ./internals/deploy.sh prod
+  development:
+    branch: development
+    commands:
+      - ./internals/deploy.sh dev

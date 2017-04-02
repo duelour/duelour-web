@@ -1,0 +1,26 @@
+#!/bin/bash -e
+
+ENV=$1
+shift
+CMD=$@
+
+[[ -z "$ENV" ]] && echo "ERROR: specify an environment" && exit 1
+
+FILE="now.${ENV}.json"
+
+[[ ! -f "$FILE" ]] && echo "ERROR: $FILE not found" && exit 1
+
+function cleanup {
+  rm -f now.json
+  [[ -f "now.bak.json" ]] && mv now.bak.json now.json
+}
+trap cleanup EXIT
+
+[[ -f "now.json" ]] && mv now.json now.bak.json
+cp $FILE now.json
+
+if [[ -z "$2" ]]; then
+  eval 'now ../' && now alias
+else
+  eval "now ../ $CMD"
+fi

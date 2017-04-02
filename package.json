@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "repository": "https://github.com/duelour/duelour-web",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "dev": "next app/",
+    "build": "next build app/",
+    "start": "next start app/",
     "lint": "xo",
     "pretest": "npm run lint",
     "test": "echo 'Tests passed... ;)'"
