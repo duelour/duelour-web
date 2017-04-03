@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+import bootflat from 'bootflat/bootflat/css/bootflat.min.css';
 
 export default () => (
   <div>
@@ -9,6 +11,8 @@ export default () => (
       <link rel="icon" type="image/png" href="/static/boxing-icon.png"/>
       <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet"/>
     </Head>
+    <style dangerouslySetInnerHTML={{ __html: bootstrap }}/>
+    <style dangerouslySetInnerHTML={{ __html: bootflat }}/>
     <style jsx global>{`
       html, body, #__next, #__next > div {
         height: 100%;
