@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import bootflat from 'bootflat/bootflat/css/bootflat.min.css';
+import app from './styles.css';
 
 export default () => (
   <div>
@@ -13,21 +14,6 @@ export default () => (
     </Head>
     <style dangerouslySetInnerHTML={{ __html: bootstrap }}/>
     <style dangerouslySetInnerHTML={{ __html: bootflat }}/>
-    <style jsx global>{`
-      html, body, #__next, #__next > div {
-        height: 100%;
-        width: 100%;
-      }
-      body {
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 0;
-        -webkit-font-smoothing: antialiased !important;
-        font-family: "PT Sans", Helvetica, Arial, sans-serif !important;
-      }
-      * {
-        box-sizing: border-box;
-      }
-    `}</style>
+    <style dangerouslySetInnerHTML={{ __html: app }}/>
   </div>
 );
