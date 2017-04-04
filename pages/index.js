@@ -1,12 +1,18 @@
 import { Button } from 'react-bootstrap';
 import { withFirebase } from '../lib/firebase';
+import { getMember } from '../lib/members';
 import { signOut } from '../lib/user';
 import Page from '../document/page';
 
 class Index extends React.Component {
   constructor(props, context) {
     super(props, context);
+    this.state = { member: {} };
     this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ member: getMember() });
   }
 
   async handleLogout() {
@@ -14,18 +20,14 @@ class Index extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { member } = this.state;
     return (
       <Page>
-        Welcome, { user.email }
+        Welcome, { member && member.displayName }
         <Button onClick={this.handleLogout}>Logout</Button>
       </Page>
     );
   }
 }
-
-Index.propTypes = {
-  user: React.PropTypes.object.isRequired
-};
 
 export default withFirebase(Index, { isProtected: true });

@@ -7,7 +7,7 @@ import LoadingIcon from '../common/loading-icon';
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', isRegister: false, isFetching: false, validationErrors: {} };
+    this.state = { displayName: '', email: '', password: '', isRegister: false, isFetching: false, validationErrors: {} };
     this.handleToggleRegisterForm = this.handleToggleRegisterForm.bind(this);
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,13 +25,16 @@ class LoginForm extends React.Component {
   }
 
   async handleSubmit() {
-    const { email, password, reenterPassword, isRegister } = this.state;
+    const { displayName, email, password, reenterPassword, isRegister } = this.state;
     const { onSubmit } = this.props;
 
     this.setState({ isFetching: true });
 
     if (!email) {
       this.setState({ validationErrors: Object.assign(this.state.validationErrors, { email: 'Please enter an email!' }) });
+    }
+    if (isRegister && !displayName) {
+      this.setState({ validationErrors: Object.assign(this.state.validationErrors, { displayName: 'Please enter a display name!' }) });
     }
     if (!password) {
       this.setState({ validationErrors: Object.assign(this.state.validationErrors, { password: 'Please enter a password!' }) });
@@ -47,8 +50,8 @@ class LoginForm extends React.Component {
       return;
     }
 
-    if (onSubmit && email && password) {
-      await onSubmit(email, password, isRegister);
+    if (onSubmit) {
+      await onSubmit(email, password, displayName, isRegister);
     }
 
     this.setState({ isFetching: false });
@@ -72,6 +75,13 @@ class LoginForm extends React.Component {
             <FormControl type="text" placeholder="Email" onChange={this.onChange('email')}/>
             <HelpBlock>{validationErrors.email}</HelpBlock>
           </FormGroup>
+          {
+            isRegister &&
+            <FormGroup validationState={validationErrors.displayName ? 'error' : null}>
+              <FormControl type="text" placeholder="Display name" onChange={this.onChange('displayName')}/>
+              <HelpBlock>{validationErrors.displayName}</HelpBlock>
+            </FormGroup>
+          }
           <FormGroup validationState={validationErrors.password ? 'error' : null}>
             <FormControl type="password" placeholder="Password" onChange={this.onChange('password')}/>
             <HelpBlock>{validationErrors.password}</HelpBlock>
