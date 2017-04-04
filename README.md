@@ -5,7 +5,7 @@
 
 > 👊🌎 The web interface for Duelour.
 
-Powered by [next.js](https://github.com/zeit/next.js) and deployed with [now](https://zeit.co/now)
+Powered by [next.js](https://github.com/zeit/next.js) with [Firebase](https://firebase.google.com/), and deployed using [now](https://zeit.co/now)
 
 ## Install
 
@@ -22,6 +22,10 @@ Powered by [next.js](https://github.com/zeit/next.js) and deployed with [now](ht
 - To run a production build
   - `yarn build`
   - `yarn start`
+  
+## Firebase Data Models
+
+[Firebase Data Models ERD](https://drive.google.com/file/d/0B4471KLmj6C3OFVhZGc1VmpWMEk/view?usp=sharing)
 
 ## License
 
