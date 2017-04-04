@@ -57,11 +57,11 @@ class Login extends React.Component {
         <Grid>
           <Row className="login-form-wrapper">
             <Col xs={12}>
-              <Logo width="150px"/>
+              <Logo imageWidth="150px"/>
             </Col>
           </Row>
           <Row>
-            <Col md={6} mdOffset={3} sm={8} smOffset={2}>
+            <Col lg={4} lgOffset={4} md={6} mdOffset={3} sm={8} smOffset={2}>
               <LoginForm
                 error={err}
                 onSubmit={this.handleAuthUser}

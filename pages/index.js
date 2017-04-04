@@ -1,7 +1,9 @@
-import { Button } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 import { withFirebase } from '../lib/firebase';
 import { getMember } from '../lib/members';
 import { signOut } from '../lib/user';
+import Header from '../components/common/header';
+import Challenges from '../components/challenges/index';
 import Page from '../document/page';
 
 class Index extends React.Component {
@@ -23,8 +25,13 @@ class Index extends React.Component {
     const { member } = this.state;
     return (
       <Page>
-        Welcome, { member && member.displayName }
-        <Button onClick={this.handleLogout}>Logout</Button>
+        <Grid>
+          <Header
+            member={member}
+            onClickLogout={this.handleLogout}
+            />
+          <Challenges/>
+        </Grid>
       </Page>
     );
   }

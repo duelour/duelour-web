@@ -1,8 +1,8 @@
-const Logo = ({ width }) => (
+const Logo = ({ imageWidth, fontSize }) => (
   <div className="center-align">
-    <img src="/static/boxing.png" width={width}/>
+    <img src="/static/boxing.png" width={imageWidth}/>
     <div className="title-wrapper">
-      <div className="title"><span>Duelour</span></div>
+      <div className="title"><span style={{ fontSize }}>Duelour</span></div>
     </div>
     <style jsx>{`
       .center-align {
@@ -11,7 +11,6 @@ const Logo = ({ width }) => (
 
       .title {
         font-weight: bold;
-        font-size: 50px;
         color: #cc4b46;
         height: 100px;
       }
@@ -20,11 +19,13 @@ const Logo = ({ width }) => (
 );
 
 Logo.propTypes = {
-  width: React.PropTypes.string
+  imageWidth: React.PropTypes.string,
+  fontSize: React.PropTypes.string
 };
 
 Logo.defaultProps = {
-  width: '300px'
+  imageWidth: '300px',
+  fontSize: '50px'
 };
 
 export default Logo;
