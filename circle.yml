@@ -11,11 +11,11 @@ deployment:
     branch: master
     commands:
       - cp ./internals/now.prod.json now.json
-      - now -t $NOW_TOKEN
+      - now -t $NOW_TOKEN -e FIREBASE_API_KEY=$FIREBASE_PROD_API_KEY
       - now alias -t $NOW_TOKEN
   staging:
     branch: development
     commands:
       - cp ./internals/now.dev.json now.json
-      - now -t $NOW_TOKEN
+      - now -t $NOW_TOKEN -e FIREBASE_API_KEY=$FIREBASE_DEV_API_KEY
       - now alias -t $NOW_TOKEN

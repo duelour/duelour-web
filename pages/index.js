@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap';
-import firebase, { withFirebase } from '../lib/firebase';
+import { withFirebase } from '../lib/firebase';
+import { signOut } from '../lib/user';
 import Page from '../document/page';
 
 class Index extends React.Component {
@@ -9,7 +10,7 @@ class Index extends React.Component {
   }
 
   async handleLogout() {
-    await firebase.auth().signOut();
+    await signOut();
   }
 
   render() {

@@ -36,3 +36,6 @@ body {
   height: 80px;
   font-size: 22px;
 }
+.alert-danger {
+  color: white !important;
+}

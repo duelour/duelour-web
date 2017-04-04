@@ -1334,10 +1334,6 @@ convert-source-map@^1.1.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.0.tgz#9acd70851c6d5dfdd93d9282e5edf94a03ff46b5"
 
-cookie@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
-
 copy-paste@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/copy-paste/-/copy-paste-1.3.0.tgz#a7e6c4a1c28fdedf2b081e72b97df2ef95f471ed"
@@ -1614,10 +1610,6 @@ delegates@^1.0.0:
 depd@1.1.0, depd@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.0.tgz#e1bd82c6aab6ced965b97b88b17ed3e528ca18c3"
-
-derivable@1.0.0-beta11:
-  version "1.0.0-beta11"
-  resolved "https://registry.yarnpkg.com/derivable/-/derivable-1.0.0-beta11.tgz#7c8991d47a51ef2986cec337d30cd43eff7a6aa8"
 
 des.js@^1.0.0:
   version "1.0.0"
@@ -2910,10 +2902,6 @@ is-natural-number@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/is-natural-number/-/is-natural-number-2.1.1.tgz#7d4c5728377ef386c3e194a9911bf57c6dc335e7"
 
-is-node@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/is-node/-/is-node-1.0.2.tgz#d7d002745ef7debbb7477e988956ab0a4fccb653"
-
 is-npm@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-npm/-/is-npm-1.0.0.tgz#f2fb63a65e4905b406c86072765a1a4dc793b9f4"
@@ -3140,10 +3128,6 @@ jsonfile@^2.1.0:
 jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
-
-jsonpointer@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-3.0.1.tgz#612a9578eab6df8ec9d91d399c10d0e76c7f3f94"
 
 jsonpointer@^4.0.0:
   version "4.0.1"
@@ -3378,10 +3362,6 @@ map-obj@^1.0.0, map-obj@^1.0.1:
 md5-file@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-3.1.1.tgz#db3c92c09bbda5c2de883fa5490dd711fddbbab9"
-
-memoize-decorator@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/memoize-decorator/-/memoize-decorator-1.0.2.tgz#605a41715c4171db192a90098b00ab8d6e1102f5"
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
@@ -4345,23 +4325,9 @@ react-bootstrap@^0.30.8:
     uncontrollable "^4.0.1"
     warning "^3.0.0"
 
-react-cookie@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-1.0.5.tgz#234190bd55ddfea361444a89c873077ab6abf651"
-  dependencies:
-    cookie "^0.3.1"
-    is-node "^1.0.2"
-    object-assign "^4.1.0"
-
 react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
-
-react-derivable@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/react-derivable/-/react-derivable-0.2.0.tgz#0d092532dd8c5a46a2ca87a335b3614be3063e57"
-  dependencies:
-    invariant "^2.2.1"
 
 react-dom@^15.4.2:
   version "15.4.2"
@@ -4370,20 +4336,6 @@ react-dom@^15.4.2:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-
-react-forms@beta:
-  version "2.0.0-beta35"
-  resolved "https://registry.yarnpkg.com/react-forms/-/react-forms-2.0.0-beta35.tgz#fb3aeeedaec91ec5f38fda76bde2e1052bbce1b4"
-  dependencies:
-    derivable "1.0.0-beta11"
-    generate-function "^2.0.0"
-    generate-object-property "^1.1.0"
-    invariant "^2.2.1"
-    jsonpointer "^3.0.0"
-    lodash "^4.0.0"
-    memoize-decorator "^1.0.2"
-    react-derivable "^0.2.0"
-    react-stylesheet "^1.0.0"
 
 react-hot-loader@3.0.0-beta.6:
   version "3.0.0-beta.6"
@@ -4416,12 +4368,6 @@ react-proxy@^3.0.0-alpha.0:
   resolved "https://registry.yarnpkg.com/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz#4400426bcfa80caa6724c7755695315209fa4b07"
   dependencies:
     lodash "^4.6.1"
-
-react-stylesheet@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-stylesheet/-/react-stylesheet-1.0.2.tgz#4194b3ced11d8aaafd4bacf77c548e87e8d88422"
-  dependencies:
-    invariant "^2.1.0"
 
 react@^15.4.2:
   version "15.4.2"
@@ -5421,7 +5367,7 @@ webpack-hot-middleware@2.17.1:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
-webpack-sources@^0.2.0:
+webpack-sources@^0.2.0, webpack-sources@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-0.2.3.tgz#17c62bfaf13c707f9d02c479e0dcdde8380697fb"
   dependencies:
@@ -5451,6 +5397,31 @@ webpack@2.3.1:
     uglify-js "^2.8.5"
     watchpack "^1.3.1"
     webpack-sources "^0.2.0"
+    yargs "^6.0.0"
+
+webpack@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.3.3.tgz#eecc083c18fb7bf958ea4f40b57a6640c5a0cc78"
+  dependencies:
+    acorn "^4.0.4"
+    acorn-dynamic-import "^2.0.0"
+    ajv "^4.7.0"
+    ajv-keywords "^1.1.1"
+    async "^2.1.2"
+    enhanced-resolve "^3.0.0"
+    interpret "^1.0.0"
+    json-loader "^0.5.4"
+    loader-runner "^2.3.0"
+    loader-utils "^0.2.16"
+    memory-fs "~0.4.1"
+    mkdirp "~0.5.0"
+    node-libs-browser "^2.0.0"
+    source-map "^0.5.3"
+    supports-color "^3.1.0"
+    tapable "~0.2.5"
+    uglify-js "^2.8.5"
+    watchpack "^1.3.1"
+    webpack-sources "^0.2.3"
     yargs "^6.0.0"
 
 websocket-driver@>=0.5.1:
