@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 import Logo from './logo';
 
-const Header = ({ member, onClickLogout }) => {
+const Header = ({ player, onClickLogout }) => {
   return (
     <Row className="margin-top-20">
       <Col xsHidden sm={4}>
@@ -12,7 +12,7 @@ const Header = ({ member, onClickLogout }) => {
       <Col sm={4}/>
       <Col sm={4} className="text-right">
         <div className="user">
-          <div className="hidden-xs"><strong className="welcome">Welcome, {member.displayName}!</strong></div>
+          <div className="hidden-xs"><strong className="welcome">Welcome, {player.displayName}!</strong></div>
           <div className="user-link"><a href="#" onClick={onClickLogout}>Logout</a></div>
         </div>
       </Col>
@@ -44,12 +44,12 @@ const Header = ({ member, onClickLogout }) => {
 };
 
 Header.propTypes = {
-  member: React.PropTypes.object,
+  player: React.PropTypes.object,
   onClickLogout: React.PropTypes.func.isRequired
 };
 
 Header.defaultProps = {
-  member: {}
+  player: {}
 };
 
 export default Header;

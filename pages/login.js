@@ -2,7 +2,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import Router from 'next/router';
 import { withFirebase, normalizeFbObject } from '../lib/firebase';
 import { signIn, createUser } from '../lib/user';
-import { createMember, findMemberByUidOnce, findMemberByDisplayNameOnce, setMember } from '../lib/members';
+import { createPlayer, findPlayerByUidOnce, findPlayerByDisplayNameOnce, setPlayer } from '../lib/players';
 import Logo from '../components/common/logo';
 import LoginForm from '../components/login/login-form';
 import Page from '../document/page';
@@ -24,25 +24,25 @@ class Login extends React.Component {
   async handleAuthUser(email, password, displayName, isRegister) {
     try {
       if (isRegister) {
-        const snapshot = await findMemberByDisplayNameOnce(displayName);
+        const snapshot = await findPlayerByDisplayNameOnce(displayName);
         if (snapshot.val()) {
           throw new Error('Display name already exists!');
         }
 
-        // Create a user and member
+        // Create a user and player
         const user = await createUser(email, password);
-        await createMember(user.uid, displayName);
+        await createPlayer(user.uid, displayName);
 
-        // Get the member details and set member in local storage
-        const member = await findMemberByUidOnce(user.uid);
-        const normalizedMember = normalizeFbObject(member.val());
-        setMember(normalizedMember);
+        // Get the player details and set player in local storage
+        const player = await findPlayerByUidOnce(user.uid);
+        const normalizedPlayer = normalizeFbObject(player.val());
+        setPlayer(normalizedPlayer);
       } else {
-        // Sign user in, find member and set member in local storage
+        // Sign user in, find player and set player in local storage
         const user = await signIn(email, password);
-        const member = await findMemberByUidOnce(user.uid);
-        const normalizedMember = normalizeFbObject(member.val());
-        setMember(normalizedMember);
+        const player = await findPlayerByUidOnce(user.uid);
+        const normalizedPlayer = normalizeFbObject(player.val());
+        setPlayer(normalizedPlayer);
       }
       await Router.push('/');
     } catch (err) {

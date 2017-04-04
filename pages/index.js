@@ -1,6 +1,6 @@
 import { Grid } from 'react-bootstrap';
 import { withFirebase } from '../lib/firebase';
-import { getMember } from '../lib/members';
+import { getPlayer } from '../lib/players';
 import { signOut } from '../lib/user';
 import Header from '../components/common/header';
 import Challenges from '../components/challenges/index';
@@ -9,12 +9,12 @@ import Page from '../document/page';
 class Index extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { member: {} };
+    this.state = { player: {} };
     this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ member: getMember() });
+    this.setState({ player: getPlayer() });
   }
 
   async handleLogout() {
@@ -22,12 +22,12 @@ class Index extends React.Component {
   }
 
   render() {
-    const { member } = this.state;
+    const { player } = this.state;
     return (
       <Page>
         <Grid>
           <Header
-            member={member}
+            player={player}
             onClickLogout={this.handleLogout}
             />
           <Challenges/>
