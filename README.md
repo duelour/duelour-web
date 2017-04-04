@@ -5,6 +5,8 @@
 
 > 👊🌎 The web interface for Duelour.
 
+Powered by [next.js](https://github.com/zeit/next.js) and deployed with [now](https://zeit.co/now)
+
 ## Install
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account.
