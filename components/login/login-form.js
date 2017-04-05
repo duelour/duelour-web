@@ -24,10 +24,11 @@ class LoginForm extends React.Component {
     };
   }
 
-  async handleSubmit() {
+  async handleSubmit(e) {
     const { displayName, email, password, reenterPassword, isRegister } = this.state;
     const { onSubmit } = this.props;
 
+    e.preventDefault();
     this.setState({ isFetching: true });
 
     if (!email) {
@@ -70,7 +71,7 @@ class LoginForm extends React.Component {
           error.message &&
           <Alert bsStyle="danger">{error.message}</Alert>
         }
-        <form id="login-form">
+        <form id="login-form" onSubmit={this.handleSubmit}>
           <FormGroup validationState={validationErrors.email ? 'error' : null}>
             <FormControl type="text" placeholder="Email" onChange={this.onChange('email')}/>
             <HelpBlock>{validationErrors.email}</HelpBlock>
@@ -96,8 +97,7 @@ class LoginForm extends React.Component {
           <Button
             bsStyle="primary"
             className={classNames('btn-lg', isFetching ? 'disabled' : '')}
-            type="button"
-            onClick={this.handleSubmit}
+            type="submit"
             >
             {
               isFetching ?

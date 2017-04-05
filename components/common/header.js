@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 import Logo from './logo';
 
-const Header = ({ player, onClickLogout }) => {
+const Header = ({ player, onClickLogout, title }) => {
   return (
     <Row className="margin-top-20">
       <Col xsHidden sm={4}>
@@ -9,10 +9,14 @@ const Header = ({ player, onClickLogout }) => {
           <Logo imageWidth="80px" fontSize="25px"/>
         </div>
       </Col>
-      <Col sm={4}/>
-      <Col sm={4} className="text-right">
+      <Col sm={4} className="text-center">
+        <div className="header-title">
+          <strong className="header-title-text">{title}</strong>
+        </div>
+      </Col>
+      <Col xsHidden sm={4} className="text-right">
         <div className="user">
-          <div className="hidden-xs"><strong className="welcome">Welcome, {player.displayName}!</strong></div>
+          <div><strong className="welcome">Welcome, {player.displayName}!</strong></div>
           <div className="user-link"><a href="#" onClick={onClickLogout}>Logout</a></div>
         </div>
       </Col>
@@ -20,6 +24,21 @@ const Header = ({ player, onClickLogout }) => {
         .logo {
           margin-top: 10px;
           width: 130px;
+        }
+
+        .header-title {
+          margin-top: 30px !important;
+        }
+        .header-title-text {
+          font-size: 40px;
+        }
+        @media screen and (max-width: 768px) {
+          .header-title {
+            margin-top: 10px !important;
+          }
+          .header-title-text {
+            font-size: 30px;
+          }
         }
 
         .user {
@@ -45,7 +64,8 @@ const Header = ({ player, onClickLogout }) => {
 
 Header.propTypes = {
   player: React.PropTypes.object,
-  onClickLogout: React.PropTypes.func.isRequired
+  onClickLogout: React.PropTypes.func.isRequired,
+  title: React.PropTypes.string.isRequired
 };
 
 Header.defaultProps = {
