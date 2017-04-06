@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import { withFirebase } from '../lib/firebase';
-import { createChallenge } from '../lib/challenges';
+import { createChallengeForPlayer } from '../lib/challenges';
 import { getPlayer } from '../lib/players';
 import PageWithHeader from '../components/common/page-with-header';
 import CreateChallengeForm from '../components/challenges/create-challenge-form';
@@ -13,13 +13,17 @@ class CreateChallenge extends React.Component {
 
   async handleCreateChallenge(displayName) {
     const myPlayer = getPlayer();
-    await createChallenge(myPlayer.displayName, { displayName });
-    await Router.push('/');
+    try {
+      await createChallengeForPlayer(displayName, myPlayer.displayName);
+      await Router.push('/');
+    } catch (err) {
+      console.log('Error creating challenge ', err);
+    }
   }
 
   render() {
     return (
-      <PageWithHeader title="Create a challenge">
+      <PageWithHeader title={<div>Create a challenge</div>}>
         <CreateChallengeForm onSubmit={this.handleCreateChallenge}/>
       </PageWithHeader>
     );

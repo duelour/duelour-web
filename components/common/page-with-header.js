@@ -36,11 +36,11 @@ class PageWithHeader extends React.Component {
 
 PageWithHeader.propTypes = {
   children: React.PropTypes.node.isRequired,
-  title: React.PropTypes.string
+  title: React.PropTypes.object
 };
 
 PageWithHeader.defaultProps = {
-  title: ''
+  title: <div/>
 };
 
 export default PageWithHeader;

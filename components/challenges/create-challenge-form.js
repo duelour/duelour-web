@@ -21,8 +21,6 @@ class CreateChallengeForm extends React.Component {
     }
 
     await onSubmit(displayName);
-
-    this.setState({ isFetching: false });
   }
 
   onChange(name) {

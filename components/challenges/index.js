@@ -1,28 +1,44 @@
+import { Row, Col, Well } from 'react-bootstrap';
 import Link from 'next/link';
+import NoChallenges from './no-challenges';
 
-const Challenges = () => {
+const Challenges = ({ challenges }) => {
+  if (challenges.length === 0) {
+    return <NoChallenges/>;
+  }
   return (
-    <div className="no-active">
-      <strong className="no-active-text">You have no active challenges!</strong>
-      <div className="create-challenge"><Link prefetch href="/create-challenge"><a>Create a challenge</a></Link></div>
+    <div>
+      <Row style={{ marginBottom: '20px' }}>
+        <Col xs={12}>
+          <Link href="create-challenge"><a><strong>Create another challenge...</strong></a></Link>
+        </Col>
+      </Row>
+      <Row>
+        {
+          challenges.map(challenge =>
+            <Col
+              key={challenge.key}
+              className="text-center"
+              lg={3}
+              md={4}
+              sm={6}
+              xs={12}
+              >
+              <Well>
+                <div className="challenge-name">{ challenge.displayName }</div>
+              </Well>
+            </Col>
+          )
+        }
+      </Row>
       <style jsx>{`
-        .no-active-text {
-          font-size: 50px;
-        }
-        .no-active {
-          text-align: center;
-          margin-top: 100px;
-        }
         a {
           font-size: 20px;
         }
-        .create-challenge {
-          margin-top: 20px;
-        }
-        @media screen and (max-width: 768px) {
-          .no-active-text {
-            font-size: 30px;
-          }
+
+        .challenge-name {
+          font-size: 20px;
+          font-weight: bold;
         }
       `}</style>
     </div>
@@ -30,6 +46,7 @@ const Challenges = () => {
 };
 
 Challenges.propTypes = {
+  challenges: React.PropTypes.array.isRequired
 };
 
 export default Challenges;

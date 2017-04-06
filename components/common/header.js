@@ -3,7 +3,7 @@ import Logo from './logo';
 
 const Header = ({ player, onClickLogout, title }) => {
   return (
-    <Row className="margin-top-20">
+    <Row className="margin-top-20 margin-bottom-40">
       <Col xsHidden sm={4}>
         <div className="logo">
           <Logo imageWidth="80px" fontSize="25px"/>
@@ -27,7 +27,7 @@ const Header = ({ player, onClickLogout, title }) => {
         }
 
         .header-title {
-          margin-top: 30px !important;
+          margin-top: 10px !important;
         }
         .header-title-text {
           font-size: 40px;
@@ -65,7 +65,7 @@ const Header = ({ player, onClickLogout, title }) => {
 Header.propTypes = {
   player: React.PropTypes.object,
   onClickLogout: React.PropTypes.func.isRequired,
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.object.isRequired
 };
 
 Header.defaultProps = {

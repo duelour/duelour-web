@@ -12,7 +12,6 @@ const Logo = ({ imageWidth, fontSize }) => (
       .title {
         font-weight: bold;
         color: #cc4b46;
-        height: 100px;
       }
     `}</style>
   </div>
