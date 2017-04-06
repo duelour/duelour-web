@@ -5011,7 +5011,7 @@ stripe@4.16.1:
   dependencies:
     loader-utils "^0.2.7"
 
-styled-jsx@0.5.7:
+styled-jsx@0.5.7, styled-jsx@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-0.5.7.tgz#2cb02263ffa719b1435a864fdd6c62802ae86669"
   dependencies:

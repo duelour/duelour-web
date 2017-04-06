@@ -71,7 +71,7 @@ class LoginForm extends React.Component {
           error.message &&
           <Alert bsStyle="danger">{error.message}</Alert>
         }
-        <form id="login-form" onSubmit={this.handleSubmit}>
+        <form id="form-large" className="text-center" onSubmit={this.handleSubmit}>
           <FormGroup validationState={validationErrors.email ? 'error' : null}>
             <FormControl type="text" placeholder="Email" onChange={this.onChange('email')}/>
             <HelpBlock>{validationErrors.email}</HelpBlock>
