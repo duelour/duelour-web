@@ -55,7 +55,7 @@ class Login extends React.Component {
     return (
       <Page>
         <Grid>
-          <Row className="login-form-wrapper">
+          <Row className="login-form-wrapper" style={{ marginBottom: '20px' }}>
             <Col xs={12}>
               <Logo imageWidth="150px"/>
             </Col>
