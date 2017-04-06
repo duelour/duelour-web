@@ -3,23 +3,30 @@ import Logo from './logo';
 
 const Header = ({ player, onClickLogout, title }) => {
   return (
-    <Row className="margin-top-20 margin-bottom-40">
-      <Col xsHidden sm={4}>
-        <div className="logo">
-          <Logo imageWidth="80px" fontSize="25px"/>
-        </div>
-      </Col>
-      <Col sm={4} className="text-center">
-        <div className="header-title">
-          <strong className="header-title-text">{title}</strong>
-        </div>
-      </Col>
-      <Col xsHidden sm={4} className="text-right">
-        <div className="user">
-          <div><strong className="welcome">Welcome, {player.displayName}!</strong></div>
-          <div className="user-link"><a href="#" onClick={onClickLogout}>Logout</a></div>
-        </div>
-      </Col>
+    <div>
+      <Row className="hidden-lg hidden-md hidden-sm text-right" style={{ marginTop: '10px' }}>
+        <Col xs={12}>
+          <a href="#" onClick={onClickLogout}>Logout</a>
+        </Col>
+      </Row>
+      <Row className="margin-top-20 margin-bottom-40">
+        <Col xsHidden sm={4}>
+          <div className="logo">
+            <Logo imageWidth="80px" fontSize="25px"/>
+          </div>
+        </Col>
+        <Col sm={4} className="text-center">
+          <div className="header-title">
+            <strong className="header-title-text">{title}</strong>
+          </div>
+        </Col>
+        <Col xsHidden sm={4} className="text-right">
+          <div className="user">
+            <div><strong className="welcome">Welcome, {player.displayName}!</strong></div>
+            <div className="user-link"><a href="#" onClick={onClickLogout}>Logout</a></div>
+          </div>
+        </Col>
+      </Row>
       <style jsx>{`
         .logo {
           margin-top: 10px;
@@ -58,7 +65,7 @@ const Header = ({ player, onClickLogout, title }) => {
           }
         }
       `}</style>
-    </Row>
+    </div>
   );
 };
 
