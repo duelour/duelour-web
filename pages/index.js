@@ -27,7 +27,7 @@ class Index extends React.Component {
       this.setState({ isFetching: false });
       return;
     }
-    const challengeKeys = Object.keys(challengesKeysSnapshot.val());
+    const challengeKeys = Object.keys(challengesKeysSnapshot.val()).reverse();
     const challenges = await getChallengesByChallengeKeys(challengeKeys);
     this.setState({ isFetching: false, challenges });
   }
