@@ -14,8 +14,8 @@ class PageWithHeader extends React.Component {
     this.setState({ player: getPlayer() });
   }
 
-  async handleLogout() {
-    await signOut();
+  handleLogout() {
+    signOut();
   }
 
   render() {

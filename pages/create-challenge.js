@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { withFirebase } from '../lib/firebase';
+import withFirebase from '../lib/with-firebase';
 import { createChallengeForPlayer } from '../lib/challenges';
 import { getPlayer } from '../lib/players';
 import PageWithHeader from '../components/common/page-with-header';

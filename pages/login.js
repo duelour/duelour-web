@@ -1,8 +1,10 @@
 import { Grid, Row, Col } from 'react-bootstrap';
 import Router from 'next/router';
-import { withFirebase, normalizeFbObject } from '../lib/firebase';
-import { signIn, createUser } from '../lib/user';
-import { createPlayer, findPlayerByUidOnce, findPlayerByDisplayNameOnce, setPlayer } from '../lib/players';
+import isEmpty from 'lodash/isEmpty';
+
+import withFirebase from '../lib/with-firebase';
+import { signInPlayer, registerPlayer } from '../lib/user';
+import { findPlayerByDisplayNameOnce, setPlayer } from '../lib/players';
 import Logo from '../components/common/logo';
 import LoginForm from '../components/login/login-form';
 import Page from '../document/page';
@@ -14,10 +16,10 @@ class Login extends React.Component {
     this.handleAuthUser = this.handleAuthUser.bind(this);
   }
 
-  async componentWillReceiveProps({ user: nextUser }) {
+  componentWillReceiveProps({ user: nextUser }) {
     const { user } = this.props;
-    if (user !== nextUser && user) {
-      await Router.push('/');
+    if (user !== nextUser && !isEmpty(user) && !isEmpty(nextUser)) {
+      Router.push('/');
     }
   }
 
@@ -29,19 +31,10 @@ class Login extends React.Component {
           throw new Error('Display name already exists!');
         }
 
-        // Create a user and player
-        const user = await createUser(email, password);
-        await createPlayer(user.uid, displayName);
-
-        // Get the player details and set player in local storage
-        const player = await findPlayerByUidOnce(user.uid);
-        const normalizedPlayer = normalizeFbObject(player.val());
+        const normalizedPlayer = registerPlayer(email, password, displayName);
         setPlayer(normalizedPlayer);
       } else {
-        // Sign user in, find player and set player in local storage
-        const user = await signIn(email, password);
-        const player = await findPlayerByUidOnce(user.uid);
-        const normalizedPlayer = normalizeFbObject(player.val());
+        const normalizedPlayer = await signInPlayer(email, password);
         setPlayer(normalizedPlayer);
       }
       await Router.push('/');
@@ -73,5 +66,13 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  user: React.PropTypes.object
+};
+
+Login.defaultProps = {
+  user: {}
+};
 
 export default withFirebase(Login);
