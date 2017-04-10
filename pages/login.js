@@ -31,7 +31,7 @@ class Login extends React.Component {
           throw new Error('Display name already exists!');
         }
 
-        const normalizedPlayer = registerPlayer(email, password, displayName);
+        const normalizedPlayer = await registerPlayer(email, password, displayName);
         setPlayer(normalizedPlayer);
       } else {
         const normalizedPlayer = await signInPlayer(email, password);
