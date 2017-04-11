@@ -1,4 +1,3 @@
-import getVal from 'lodash/get';
 import withFirebase from '../lib/with-firebase';
 import { getPlayerChallenges, getChallengesFromStorage, setChallengesInStorage } from '../lib/challenges';
 import LoadingIcon from '../components/common/loading-icon';
