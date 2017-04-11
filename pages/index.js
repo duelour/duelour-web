@@ -1,3 +1,4 @@
+import getVal from 'lodash/get';
 import withFirebase from '../lib/with-firebase';
 import { getPlayerChallenges, getChallengesFromStorage, setChallengesInStorage } from '../lib/challenges';
 import LoadingIcon from '../components/common/loading-icon';
@@ -14,11 +15,15 @@ class Index extends React.Component {
     const { player } = this.props;
 
     const challengesFromStorage = getChallengesFromStorage();
-    if (challengesFromStorage && challengesFromStorage.length > 0) {
+    if (getVal(challengesFromStorage, 'active.length', 0) > 0 || getVal(challengesFromStorage, 'pending.length', 0) > 0) {
       this.setState({ isFetching: false, challenges: challengesFromStorage });
     }
 
-    const challenges = await getPlayerChallenges(player.displayName);
+    const [activeChallenges, pendingChallenges] = await Promise.all([
+      getPlayerChallenges(player.displayName),
+      getPlayerChallenges(player.displayName, 'pending')
+    ]);
+    const challenges = { active: activeChallenges, pending: pendingChallenges };
     setChallengesInStorage(challenges);
     this.setState({ isFetching: false, challenges });
   }

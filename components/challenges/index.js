@@ -1,5 +1,6 @@
-import { Row, Col, Well } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
+import ChallengesSection from './challenges-section';
 import NoChallenges from './no-challenges';
 
 const Challenges = ({ challenges }) => {
@@ -8,37 +9,16 @@ const Challenges = ({ challenges }) => {
   }
   return (
     <div>
-      <Row style={{ marginBottom: '20px' }}>
+      <Row>
         <Col xs={12}>
-          <Link href="create-challenge"><a><strong>Create another challenge...</strong></a></Link>
+          <Link href="create-challenge"><a><strong>Create challenge...</strong></a></Link>
         </Col>
       </Row>
-      <Row>
-        {
-          challenges.map(challenge =>
-            <Col
-              key={challenge.key}
-              className="text-center"
-              lg={3}
-              md={4}
-              sm={6}
-              xs={12}
-              >
-              <Well>
-                <div className="challenge-name">{ challenge.displayName }</div>
-              </Well>
-            </Col>
-          )
-        }
-      </Row>
+      <ChallengesSection title="Challenges pending approval" challenges={challenges.pending}/>
+      <ChallengesSection title="Active challenges" challenges={challenges.active}/>
       <style jsx>{`
         a {
           font-size: 20px;
-        }
-
-        .challenge-name {
-          font-size: 20px;
-          font-weight: bold;
         }
       `}</style>
     </div>
