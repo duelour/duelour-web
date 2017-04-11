@@ -1,6 +1,28 @@
-import { Row, Col, Well } from 'react-bootstrap';
+import { Row, Col, Well, OverlayTrigger, Popover } from 'react-bootstrap';
+import pull from 'lodash/pull';
+import omitBy from 'lodash/omitBy';
+import isEmpty from 'lodash/isEmpty';
+import mapValues from 'lodash/mapValues';
 
-const ChallengesSection = ({ challenges, title }) => {
+const stringifyOpponents = (allPlayers, myPlayer) => {
+  const opponents = pull(allPlayers, myPlayer);
+  return opponents.join(', ');
+};
+
+const warningPopover = (havePlayersAccepted, myPlayer) => {
+  const unacceptedPlayers = Object.values(omitBy(mapValues(havePlayersAccepted, (hasAccepted, player) => {
+    if (player !== myPlayer && !hasAccepted) {
+      return player;
+    }
+    return null;
+  }), isEmpty)).join(', ');
+
+  return (
+    <Popover id="warning-popover"><strong>{unacceptedPlayers}</strong> has not accepted their challenge </Popover>
+  );
+};
+
+const ChallengesSection = ({ challenges, player, type, title }) => {
   return (
     <div>
       <Row>
@@ -13,23 +35,42 @@ const ChallengesSection = ({ challenges, title }) => {
           challenges && challenges.map(challenge =>
             <Col
               key={challenge.key}
-              className="text-center"
               lg={3}
               md={4}
               sm={6}
               xs={12}
               >
               <Well>
-                <div className="challenge-name">{ challenge.displayName }</div>
+                {
+                  type === 'active' && challenge.status === 'pending' &&
+                  <OverlayTrigger
+                    rootClose
+                    trigger={['hover', 'click']}
+                    placement="top"
+                    overlay={warningPopover(challenge.havePlayersAccepted, player.displayName)}
+                    >
+                    <i className="material-icons">warning</i>
+                  </OverlayTrigger>
+                }
+                <div className="challenge-name text-center">
+                  <strong>{ challenge.displayName }</strong><br/>
+                  (vs. {stringifyOpponents(Object.keys(challenge.havePlayersAccepted), player.displayName)})
+                </div>
               </Well>
             </Col>
           )
         }
       </Row>
       <style jsx>{`
+        i {
+          position: fixed;
+          margin-top: 15px;
+          margin-left: 5px;
+          color: #f39c12;
+          cursor: pointer;
+        }
         .challenge-name {
           font-size: 20px;
-          font-weight: bold;
         }
       `}</style>
     </div>
@@ -38,7 +79,9 @@ const ChallengesSection = ({ challenges, title }) => {
 
 ChallengesSection.propTypes = {
   challenges: React.PropTypes.array.isRequired,
-  title: React.PropTypes.string.isRequired
+  player: React.PropTypes.object.isRequired,
+  title: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string.isRequired
 };
 
 export default ChallengesSection;

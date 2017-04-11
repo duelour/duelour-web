@@ -11,6 +11,7 @@ export default () => (
       <title>Duelour</title>
       <link rel="icon" type="image/png" href="/static/boxing-icon.png"/>
       <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     </Head>
     <style dangerouslySetInnerHTML={{ __html: bootstrap }}/>
     <style dangerouslySetInnerHTML={{ __html: bootflat }}/>

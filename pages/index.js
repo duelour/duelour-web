@@ -15,7 +15,7 @@ class Index extends React.Component {
     const { player } = this.props;
 
     const challengesFromStorage = getChallengesFromStorage();
-    if (getVal(challengesFromStorage, 'active.length', 0) > 0 || getVal(challengesFromStorage, 'pending.length', 0) > 0) {
+    if (challengesFromStorage.active || challengesFromStorage.pending) {
       this.setState({ isFetching: false, challenges: challengesFromStorage });
     }
 
@@ -30,12 +30,13 @@ class Index extends React.Component {
 
   render() {
     const { isFetching, challenges } = this.state;
+    const { player } = this.props;
     return (
       <PageWithHeader title={challenges.length > 0 ? <div>Your challenges</div> : <div/>}>
         {
           isFetching ?
             <div className="text-center"><LoadingIcon color="#ed5f59" width="100"/></div> :
-            <Challenges challenges={challenges}/>
+            <Challenges challenges={challenges} player={player}/>
         }
       </PageWithHeader>
     );
