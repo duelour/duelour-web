@@ -18,12 +18,12 @@ class Index extends React.Component {
       this.setState({ isFetching: false, challenges: challengesFromStorage });
     }
 
-    getPlayerChallenges.on(player.displayName, pendingChallenges => {
+    getPlayerChallenges.on(player.key, pendingChallenges => {
       setChallengesInStorage(Object.assign({}, challengesFromStorage, { pending: pendingChallenges }));
       this.setState({ isFetching: false, challenges: Object.assign({}, this.state.challenges, { pending: pendingChallenges }) });
     }, 'pending');
 
-    getPlayerChallenges.on(player.displayName, activeChallenges => {
+    getPlayerChallenges.on(player.key, activeChallenges => {
       setChallengesInStorage(Object.assign({}, challengesFromStorage, { active: activeChallenges }));
       this.setState({ isFetching: false, challenges: Object.assign({}, this.state.challenges, { active: activeChallenges }) });
     }, 'active');
@@ -31,8 +31,8 @@ class Index extends React.Component {
 
   componentWillUnmount() {
     const { player } = this.props;
-    getPlayerChallenges.off(player.displayName, 'pending');
-    getPlayerChallenges.off(player.displayName, 'active');
+    getPlayerChallenges.off(player.key, 'pending');
+    getPlayerChallenges.off(player.key, 'active');
   }
 
   render() {

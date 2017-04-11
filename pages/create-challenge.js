@@ -15,7 +15,7 @@ class CreateChallenge extends React.Component {
   async handleCreateChallenge({ displayName, opponentDisplayName }) {
     const { player } = this.props;
     try {
-      await createChallengeForPlayer(displayName, [player.displayName, opponentDisplayName], player.displayName);
+      await createChallengeForPlayer(displayName, [player.key, opponentDisplayName], player.key);
       Router.push('/');
     } catch (err) {
       console.log('Error creating challenge ', err);
@@ -36,7 +36,7 @@ class CreateChallenge extends React.Component {
     return (
       <PageWithHeader title={<div>Create a challenge</div>}>
         <CreateChallengeForm
-          myPlayerDisplayName={player.displayName}
+          myPlayerKey={player.key}
           onOpponentDisplayNameChange={debounce(this.handleOpponentDisplayNameChange, 500)}
           onSubmit={this.handleCreateChallenge}
           />

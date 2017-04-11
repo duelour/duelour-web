@@ -83,13 +83,13 @@ class CreateChallengeForm extends React.Component {
 
   handleOpponentDisplayNameChange(e) {
     const { validationState } = this.state;
-    const { onOpponentDisplayNameChange, myPlayerDisplayName } = this.props;
+    const { onOpponentDisplayNameChange, myPlayerKey } = this.props;
     const value = e.target.value;
 
     this.handleChange('opponentDisplayName', null)(e);
 
     onOpponentDisplayNameChange(value, player => {
-      if (myPlayerDisplayName === value.toLowerCase()) {
+      if (myPlayerKey === value.toLowerCase()) {
         this.setState({ validationState: Object.assign(validationState, {
           opponentDisplayName: {
             state: 'error',
@@ -187,7 +187,7 @@ class CreateChallengeForm extends React.Component {
 }
 
 CreateChallengeForm.propTypes = {
-  myPlayerDisplayName: React.PropTypes.string.isRequired,
+  myPlayerKey: React.PropTypes.string.isRequired,
   onSubmit: React.PropTypes.func.isRequired,
   onOpponentDisplayNameChange: React.PropTypes.func.isRequired
 };

@@ -54,7 +54,7 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
                     rootClose
                     trigger={['hover', 'click']}
                     placement="top"
-                    overlay={warningPopover(challenge.havePlayersAccepted, player.displayName)}
+                    overlay={warningPopover(challenge.havePlayersAccepted, player.key)}
                     >
                     <i className="error material-icons">error</i>
                   </OverlayTrigger>
@@ -65,14 +65,14 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
                     rootClose
                     trigger={['hover', 'click']}
                     placement="top"
-                    overlay={pendingPopover(challenge.havePlayersAccepted, player.displayName)}
+                    overlay={pendingPopover(challenge.havePlayersAccepted, player.key)}
                     >
                     <i className="warning material-icons">warning</i>
                   </OverlayTrigger>
                 }
                 <div className="challenge-name text-center">
                   <strong>{ challenge.displayName }</strong><br/>
-                  (vs. {stringifyOpponents(Object.keys(challenge.havePlayersAccepted), player.displayName)})
+                  (vs. {stringifyOpponents(Object.keys(challenge.havePlayersAccepted), player.key)})
                 </div>
               </Well>
             </Col>
