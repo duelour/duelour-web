@@ -1,5 +1,6 @@
 import { Button, ControlLabel, Form, FormGroup, FormControl, HelpBlock, Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
+import find from 'lodash/find';
 import getVal from 'lodash/get';
 import LoadingIcon from '../common/loading-icon';
 
@@ -15,6 +16,8 @@ class CreateChallengeForm extends React.Component {
       isFetching: false,
       validationState: {}
     };
+    this.checkIfValid = this.checkIfValid.bind(this);
+    this.doesFormHaveErrors = this.doesFormHaveErrors.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOpponentDisplayNameChange = this.handleOpponentDisplayNameChange.bind(this);
   }
@@ -40,10 +43,14 @@ class CreateChallengeForm extends React.Component {
     }) });
   }
 
+  doesFormHaveErrors() {
+    const { validationState } = this.state;
+    return find(validationState, s => s.state === 'error');
+  }
+
   async handleSubmit(e) {
     const { displayName, opponentDisplayName, validationState } = this.state;
     const { onSubmit } = this.props;
-    let isErrors = false;
 
     e.preventDefault();
     this.setState({ isFetching: true });
@@ -55,7 +62,6 @@ class CreateChallengeForm extends React.Component {
           description: 'Please enter a name!'
         }
       }) });
-      isErrors = true;
     }
     if (!opponentDisplayName) {
       this.setState({ validationState: Object.assign(validationState, {
@@ -64,9 +70,8 @@ class CreateChallengeForm extends React.Component {
           description: 'Please enter your opponents name!'
         }
       }) });
-      isErrors = true;
     }
-    if (isErrors) {
+    if (this.doesFormHaveErrors()) {
       this.setState({ isFetching: false });
       return;
     }
@@ -139,7 +144,7 @@ class CreateChallengeForm extends React.Component {
           validationState={getVal(validationState, 'opponentDisplayName.state')}
           >
           <Col lg={5} sm={4} xs={12} className="text-right" componentClass={ControlLabel}>
-            <div className="form-label">Type your opponent&quot;s name</div>
+            <div className="form-label">Type your opponent&#39;s name</div>
           </Col>
           <Col lg={4} sm={6} xs={12}>
             <FormControl type="text" placeholder="Bill" onChange={this.handleOpponentDisplayNameChange}/>
