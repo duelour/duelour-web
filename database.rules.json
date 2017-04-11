@@ -1,0 +1,13 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "players": {
+      ".read": true,
+      ".indexOn": [
+        "displayName",
+        "uid"
+      ]
+    }
+  }
+}
