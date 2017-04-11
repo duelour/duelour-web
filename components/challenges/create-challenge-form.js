@@ -102,12 +102,15 @@ class CreateChallengeForm extends React.Component {
           }
         }) });
       } else if (player) {
-        this.setState({ validationState: Object.assign(validationState, {
-          opponentDisplayName: {
-            state: 'success',
-            description: <span>Player <strong>{value}</strong> found!</span>
-          }
-        }) });
+        this.setState({
+          opponentDisplayName: player.displayName,
+          validationState: Object.assign(validationState, {
+            opponentDisplayName: {
+              state: 'success',
+              description: <span>Player <strong>{player.displayName}</strong> found!</span>
+            }
+          })
+        });
       } else {
         this.setState({ validationState: Object.assign(validationState, {
           opponentDisplayName: {

@@ -15,7 +15,7 @@ class CreateChallenge extends React.Component {
   async handleCreateChallenge({ displayName, opponentDisplayName }) {
     const { player } = this.props;
     try {
-      await createChallengeForPlayer(displayName, [player.key, opponentDisplayName], player.key);
+      await createChallengeForPlayer(displayName, [player.displayName, opponentDisplayName], player.key);
       Router.push('/');
     } catch (err) {
       console.log('Error creating challenge ', err);
