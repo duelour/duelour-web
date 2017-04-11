@@ -1,4 +1,4 @@
-import { getPlayer } from '../../lib/players';
+import { getPlayerInStorage } from '../../lib/players';
 import { signOut } from '../../lib/user';
 import Page from '../../document/page';
 import Header from './header';
@@ -11,7 +11,7 @@ class PageWithHeader extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ player: getPlayer() });
+    this.setState({ player: getPlayerInStorage() });
   }
 
   handleLogout() {

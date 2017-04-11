@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import withFirebase from '../lib/with-firebase';
 import { signInPlayer, registerPlayer } from '../lib/user';
-import { findPlayerByDisplayNameOnce, setPlayer } from '../lib/players';
+import { findPlayerByDisplayNameOnce, setPlayerInStorage } from '../lib/players';
 import Logo from '../components/common/logo';
 import LoginForm from '../components/login/login-form';
 import Page from '../document/page';
@@ -32,10 +32,10 @@ class Login extends React.Component {
         }
 
         const normalizedPlayer = await registerPlayer(email, password, displayName);
-        setPlayer(normalizedPlayer);
+        setPlayerInStorage(normalizedPlayer);
       } else {
         const normalizedPlayer = await signInPlayer(email, password);
-        setPlayer(normalizedPlayer);
+        setPlayerInStorage(normalizedPlayer);
       }
       await Router.push('/');
     } catch (err) {
