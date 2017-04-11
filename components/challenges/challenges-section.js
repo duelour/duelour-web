@@ -81,7 +81,7 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
       </Row>
       <style jsx>{`
         i {
-          position: fixed;
+          position: absolute;
           margin-top: 15px;
           margin-left: 5px;
           cursor: pointer;

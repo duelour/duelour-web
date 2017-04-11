@@ -1,5 +1,5 @@
 import withFirebase from '../lib/with-firebase';
-import { getPlayerChallenges, getChallengesFromStorage, setChallengesInStorage } from '../lib/challenges';
+import { getChallengesFromStorage, getPlayerChallenges, setChallengesInStorage } from '../lib/challenges';
 import LoadingIcon from '../components/common/loading-icon';
 import PageWithHeader from '../components/common/page-with-header';
 import Challenges from '../components/challenges/index';
@@ -18,13 +18,21 @@ class Index extends React.Component {
       this.setState({ isFetching: false, challenges: challengesFromStorage });
     }
 
-    const [activeChallenges, pendingChallenges] = await Promise.all([
-      getPlayerChallenges(player.displayName),
-      getPlayerChallenges(player.displayName, 'pending')
-    ]);
-    const challenges = { active: activeChallenges, pending: pendingChallenges };
-    setChallengesInStorage(challenges);
-    this.setState({ isFetching: false, challenges });
+    getPlayerChallenges.on(player.displayName, pendingChallenges => {
+      setChallengesInStorage(Object.assign({}, challengesFromStorage, { pending: pendingChallenges }));
+      this.setState({ isFetching: false, challenges: Object.assign({}, this.state.challenges, { pending: pendingChallenges }) });
+    }, 'pending');
+
+    getPlayerChallenges.on(player.displayName, activeChallenges => {
+      setChallengesInStorage(Object.assign({}, challengesFromStorage, { active: activeChallenges }));
+      this.setState({ isFetching: false, challenges: Object.assign({}, this.state.challenges, { active: activeChallenges }) });
+    }, 'active');
+  }
+
+  componentWillUnmount() {
+    const { player } = this.props;
+    getPlayerChallenges.off(player.displayName, 'pending');
+    getPlayerChallenges.off(player.displayName, 'active');
   }
 
   render() {

@@ -89,7 +89,7 @@ class CreateChallengeForm extends React.Component {
     this.handleChange('opponentDisplayName', null)(e);
 
     onOpponentDisplayNameChange(value, player => {
-      if (myPlayerDisplayName === value) {
+      if (myPlayerDisplayName === value.toLowerCase()) {
         this.setState({ validationState: Object.assign(validationState, {
           opponentDisplayName: {
             state: 'error',
