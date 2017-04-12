@@ -14,7 +14,8 @@ class CreateChallengeForm extends React.Component {
     super(props);
     this.state = {
       isFetching: false,
-      validationState: {}
+      validationState: {},
+      opponentKey: ''
     };
     this.checkIfValid = this.checkIfValid.bind(this);
     this.doesFormHaveErrors = this.doesFormHaveErrors.bind(this);
@@ -49,7 +50,7 @@ class CreateChallengeForm extends React.Component {
   }
 
   async handleSubmit(e) {
-    const { displayName, opponentDisplayName, validationState } = this.state;
+    const { displayName, opponentDisplayName, opponentKey, validationState } = this.state;
     const { onSubmit } = this.props;
 
     e.preventDefault();
@@ -63,7 +64,7 @@ class CreateChallengeForm extends React.Component {
         }
       }) });
     }
-    if (!opponentDisplayName) {
+    if (!opponentDisplayName || !opponentKey) {
       this.setState({ validationState: Object.assign(validationState, {
         opponentDisplayName: {
           state: 'error',
@@ -76,7 +77,7 @@ class CreateChallengeForm extends React.Component {
       return;
     }
 
-    await onSubmit({ displayName, opponentDisplayName });
+    await onSubmit({ displayName, opponentKey, opponentDisplayName });
   }
 
   handleChange(name, defaultState = 'success') {
@@ -88,13 +89,13 @@ class CreateChallengeForm extends React.Component {
 
   handleOpponentDisplayNameChange(e) {
     const { validationState } = this.state;
-    const { onOpponentDisplayNameChange, myPlayerKey } = this.props;
+    const { onOpponentDisplayNameChange, myNormalizedDisplayName } = this.props;
     const value = e.target.value;
 
     this.handleChange('opponentDisplayName', null)(e);
 
     onOpponentDisplayNameChange(value, player => {
-      if (myPlayerKey === value.toLowerCase()) {
+      if (myNormalizedDisplayName === value.toLowerCase()) {
         this.setState({ validationState: Object.assign(validationState, {
           opponentDisplayName: {
             state: 'error',
@@ -103,6 +104,7 @@ class CreateChallengeForm extends React.Component {
         }) });
       } else if (player) {
         this.setState({
+          opponentKey: player.key,
           opponentDisplayName: player.displayName,
           validationState: Object.assign(validationState, {
             opponentDisplayName: {
@@ -195,7 +197,7 @@ class CreateChallengeForm extends React.Component {
 }
 
 CreateChallengeForm.propTypes = {
-  myPlayerKey: React.PropTypes.string.isRequired,
+  myNormalizedDisplayName: React.PropTypes.string.isRequired,
   onSubmit: React.PropTypes.func.isRequired,
   onOpponentDisplayNameChange: React.PropTypes.func.isRequired
 };

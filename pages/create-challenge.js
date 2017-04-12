@@ -1,6 +1,7 @@
 import Router from 'next/router';
 import debounce from 'lodash/debounce';
 import withFirebase from '../lib/with-firebase';
+import { normalizeFbObject } from '../lib/firebase';
 import { createChallengeForPlayer } from '../lib/challenges';
 import { findPlayerByDisplayNameOnce } from '../lib/players';
 import PageWithHeader from '../components/common/page-with-header';
@@ -12,10 +13,18 @@ class CreateChallenge extends React.Component {
     this.handleCreateChallenge = this.handleCreateChallenge.bind(this);
   }
 
-  async handleCreateChallenge({ displayName, opponentDisplayName }) {
+  async handleCreateChallenge({ displayName, opponentKey, opponentDisplayName }) {
     const { player } = this.props;
+    const players = [{
+      key: player.key,
+      displayName: player.displayName
+    }, {
+      key: opponentKey,
+      displayName: opponentDisplayName
+    }];
+
     try {
-      await createChallengeForPlayer(displayName, [player.displayName, opponentDisplayName], player.key);
+      await createChallengeForPlayer(displayName, players, player.key);
       Router.push('/');
     } catch (err) {
       console.log('Error creating challenge ', err);
@@ -25,8 +34,10 @@ class CreateChallenge extends React.Component {
   async handleOpponentDisplayNameChange(displayName, callback) {
     if (displayName && displayName.length > 0) {
       const snapshot = await findPlayerByDisplayNameOnce(displayName);
-      if (snapshot) {
-        callback(snapshot.val());
+      if (snapshot && snapshot.val()) {
+        callback(normalizeFbObject(snapshot.val()));
+      } else {
+        callback(null);
       }
     }
   }
@@ -36,7 +47,7 @@ class CreateChallenge extends React.Component {
     return (
       <PageWithHeader title={<div>Create a challenge</div>}>
         <CreateChallengeForm
-          myPlayerKey={player.key}
+          myNormalizedDisplayName={player.normalizedDisplayName}
           onOpponentDisplayNameChange={debounce(this.handleOpponentDisplayNameChange, 500)}
           onSubmit={this.handleCreateChallenge}
           />
