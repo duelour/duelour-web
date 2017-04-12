@@ -2,6 +2,18 @@
   "rules": {
     ".read": "auth != null",
     ".write": "auth != null",
+    "v0": {
+      ".read": "auth != null",
+    	".write": "auth != null",
+      "players": {
+      ".read": true,
+      ".indexOn": [
+        "normalizedDisplayName",
+        "displayName",
+        "uid"
+      ]
+    }
+    },
     "players": {
       ".read": true,
       ".indexOn": [
