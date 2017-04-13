@@ -3,8 +3,8 @@ import Router from 'next/router';
 import isEmpty from 'lodash/isEmpty';
 
 import withFirebase from '../lib/with-firebase';
-import { signInPlayer, registerPlayer } from '../lib/user';
-import { findPlayerByDisplayNameOnce, setPlayerInStorage } from '../lib/players';
+import { signInPlayer, registerPlayer } from '../lib/flows/user';
+import { findPlayerByDisplayNameOnce, setPlayerInStorage } from '../lib/data/players';
 import Logo from '../components/common/logo';
 import LoginForm from '../components/login/login-form';
 import Page from '../document/page';

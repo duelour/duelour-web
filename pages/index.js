@@ -1,5 +1,6 @@
 import withFirebase from '../lib/with-firebase';
-import { getChallengesFromStorage, getPlayerChallenges, setChallengesInStorage } from '../lib/challenges';
+import { getChallengesFromStorage, setChallengesInStorage } from '../lib/data/challenges';
+import { getPlayerChallenges } from '../lib/flows/challenges';
 import LoadingIcon from '../components/common/loading-icon';
 import PageWithHeader from '../components/common/page-with-header';
 import Challenges from '../components/challenges/index';

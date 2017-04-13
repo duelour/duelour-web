@@ -1,5 +1,5 @@
-import { getPlayerInStorage } from '../../lib/players';
-import { signOut } from '../../lib/user';
+import { getPlayerInStorage } from '../../lib/data/players';
+import { signOut } from '../../lib/data/user';
 import Page from '../../document/page';
 import Header from './header';
 
