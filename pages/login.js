@@ -1,13 +1,16 @@
-import { Grid, Row, Col } from 'react-bootstrap';
-import Router from 'next/router';
-import isEmpty from 'lodash/isEmpty';
+import { Grid, Row, Col } from "react-bootstrap";
+import Router from "next/router";
+import isEmpty from "lodash/isEmpty";
 
-import withFirebase from '../lib/with-firebase';
-import { signInPlayer, registerPlayer } from '../lib/flows/user';
-import { findPlayerByDisplayNameOnce, setPlayerInStorage } from '../lib/data/players';
-import Logo from '../components/common/logo';
-import LoginForm from '../components/login/login-form';
-import Page from '../document/page';
+import withFirebase from "../lib/with-firebase";
+import { signInPlayer, registerPlayer } from "../lib/flows/user";
+import {
+  findPlayerByDisplayNameOnce,
+  setPlayerInStorage
+} from "../lib/data/players";
+import Logo from "../components/common/logo";
+import LoginForm from "../components/login/login-form";
+import Page from "../document/page";
 
 class Login extends React.Component {
   constructor(props) {
@@ -19,7 +22,7 @@ class Login extends React.Component {
   componentWillReceiveProps({ user: nextUser }) {
     const { user } = this.props;
     if (user !== nextUser && !isEmpty(user) && !isEmpty(nextUser)) {
-      Router.push('/');
+      Router.push("/");
     }
   }
 
@@ -28,16 +31,20 @@ class Login extends React.Component {
       if (isRegister) {
         const snapshot = await findPlayerByDisplayNameOnce(displayName);
         if (snapshot.val()) {
-          throw new Error('Display name already exists!');
+          throw new Error("Display name already exists!");
         }
 
-        const normalizedPlayer = await registerPlayer(email, password, displayName);
+        const normalizedPlayer = await registerPlayer(
+          email,
+          password,
+          displayName
+        );
         setPlayerInStorage(normalizedPlayer);
       } else {
         const normalizedPlayer = await signInPlayer(email, password);
         setPlayerInStorage(normalizedPlayer);
       }
-      await Router.push('/');
+      await Router.push("/");
     } catch (err) {
       this.setState({ err });
     }
@@ -48,17 +55,14 @@ class Login extends React.Component {
     return (
       <Page>
         <Grid>
-          <Row className="login-form-wrapper" style={{ marginBottom: '20px' }}>
+          <Row className="login-form-wrapper" style={{ marginBottom: "20px" }}>
             <Col xs={12}>
-              <Logo imageWidth="150px"/>
+              <Logo imageWidth="150px" />
             </Col>
           </Row>
           <Row>
             <Col lg={4} lgOffset={4} md={6} mdOffset={3} sm={8} smOffset={2}>
-              <LoginForm
-                error={err}
-                onSubmit={this.handleAuthUser}
-                />
+              <LoginForm error={err} onSubmit={this.handleAuthUser} />
             </Col>
           </Row>
         </Grid>

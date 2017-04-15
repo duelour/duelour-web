@@ -1,22 +1,26 @@
-import { Row, Col, Well, OverlayTrigger, Popover } from 'react-bootstrap';
-import pull from 'lodash/pull';
+import { Row, Col, Well, OverlayTrigger, Popover } from "react-bootstrap";
+import pull from "lodash/pull";
 
 const stringifyOpponents = (allPlayers, myPlayer) => {
   const opponents = pull(Object.values(allPlayers), myPlayer);
-  return opponents.join(', ');
+  return opponents.join(", ");
 };
 
 const pendingPopover = (allPlayers, myPlayer) => {
   const opponents = pull(Object.values(allPlayers), myPlayer);
   return (
-    <Popover id="pending-popover"><strong>{opponents[0]}</strong> wants to challenge you!</Popover>
+    <Popover id="pending-popover">
+      <strong>{opponents[0]}</strong> wants to challenge you!
+    </Popover>
   );
 };
 
 const warningPopover = (allPlayers, myPlayer) => {
   const opponents = pull(Object.values(allPlayers), myPlayer);
   return (
-    <Popover id="pending-popover"><strong>{opponents[0]}</strong> has not accepted their challenge yet!</Popover>
+    <Popover id="pending-popover">
+      <strong>{opponents[0]}</strong> has not accepted their challenge yet!
+    </Popover>
   );
 };
 
@@ -29,46 +33,45 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
         </Col>
       </Row>
       <Row>
-        {
-          challenges && challenges.map(challenge =>
-            <Col
-              key={challenge.key}
-              lg={3}
-              md={4}
-              sm={6}
-              xs={12}
-              >
+        {challenges &&
+          challenges.map(challenge => (
+            <Col key={challenge.key} lg={3} md={4} sm={6} xs={12}>
               <Well>
-                {
-                  type === 'active' && challenge.status === 'pending' &&
+                {type === "active" &&
+                  challenge.status === "pending" &&
                   <OverlayTrigger
                     rootClose
-                    trigger={['hover', 'click']}
+                    trigger={["hover", "click"]}
                     placement="top"
-                    overlay={warningPopover(challenge.players, player.displayName)}
-                    >
+                    overlay={warningPopover(
+                      challenge.players,
+                      player.displayName
+                    )}
+                  >
                     <i className="error material-icons">error</i>
-                  </OverlayTrigger>
-                }
-                {
-                  type === 'pending' &&
+                  </OverlayTrigger>}
+                {type === "pending" &&
                   <OverlayTrigger
                     rootClose
-                    trigger={['hover', 'click']}
+                    trigger={["hover", "click"]}
                     placement="top"
-                    overlay={pendingPopover(challenge.players, player.displayName)}
-                    >
+                    overlay={pendingPopover(
+                      challenge.players,
+                      player.displayName
+                    )}
+                  >
                     <i className="warning material-icons">warning</i>
-                  </OverlayTrigger>
-                }
+                  </OverlayTrigger>}
                 <div className="challenge-name text-center">
-                  <strong>{ challenge.displayName }</strong><br/>
-                  (vs. {stringifyOpponents(challenge.players, player.displayName)})
+                  <strong>{challenge.displayName}</strong><br />
+                  (vs.
+                  {" "}
+                  {stringifyOpponents(challenge.players, player.displayName)}
+                  )
                 </div>
               </Well>
             </Col>
-          )
-        }
+          ))}
       </Row>
       <style jsx>{`
         i {

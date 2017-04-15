@@ -1,8 +1,8 @@
-import Logo from '../common/logo';
+import Logo from "../common/logo";
 
 export default () => (
   <div className="wrapper">
-    <Logo/>
+    <Logo />
     <div className="sub-title">Coming Soon...</div>
     <style jsx>{`
       .wrapper {

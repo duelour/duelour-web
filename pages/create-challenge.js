@@ -1,11 +1,12 @@
-import Router from 'next/router';
-import debounce from 'lodash/debounce';
-import withFirebase from '../lib/with-firebase';
-import { normalizeFbObject } from '../lib/data/firebase';
-import { createChallengeForPlayer } from '../lib/flows/challenges';
-import { findPlayerByDisplayNameOnce } from '../lib/data/players';
-import PageWithHeader from '../components/common/page-with-header';
-import CreateChallengeForm from '../components/challenges/create-challenge-form';
+import Router from "next/router";
+import debounce from "lodash/debounce";
+import withFirebase from "../lib/with-firebase";
+import { normalizeFbObject } from "../lib/data/firebase";
+import { createChallengeForPlayer } from "../lib/flows/challenges";
+import { findPlayerByDisplayNameOnce } from "../lib/data/players";
+import PageWithHeader from "../components/common/page-with-header";
+import CreateChallengeForm
+  from "../components/challenges/create-challenge-form";
 
 class CreateChallenge extends React.Component {
   constructor(props) {
@@ -13,21 +14,28 @@ class CreateChallenge extends React.Component {
     this.handleCreateChallenge = this.handleCreateChallenge.bind(this);
   }
 
-  async handleCreateChallenge({ displayName, opponentKey, opponentDisplayName }) {
+  async handleCreateChallenge({
+    displayName,
+    opponentKey,
+    opponentDisplayName
+  }) {
     const { player } = this.props;
-    const players = [{
-      key: player.key,
-      displayName: player.displayName
-    }, {
-      key: opponentKey,
-      displayName: opponentDisplayName
-    }];
+    const players = [
+      {
+        key: player.key,
+        displayName: player.displayName
+      },
+      {
+        key: opponentKey,
+        displayName: opponentDisplayName
+      }
+    ];
 
     try {
       await createChallengeForPlayer(displayName, players, player.key);
-      Router.push('/');
+      Router.push("/");
     } catch (err) {
-      console.log('Error creating challenge ', err);
+      console.log("Error creating challenge ", err);
     }
   }
 
@@ -48,9 +56,12 @@ class CreateChallenge extends React.Component {
       <PageWithHeader title={<div>Create a challenge</div>}>
         <CreateChallengeForm
           myNormalizedDisplayName={player.normalizedDisplayName}
-          onOpponentDisplayNameChange={debounce(this.handleOpponentDisplayNameChange, 500)}
+          onOpponentDisplayNameChange={debounce(
+            this.handleOpponentDisplayNameChange,
+            500
+          )}
           onSubmit={this.handleCreateChallenge}
-          />
+        />
       </PageWithHeader>
     );
   }

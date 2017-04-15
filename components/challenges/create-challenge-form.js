@@ -1,12 +1,21 @@
-import { Button, ControlLabel, Form, FormGroup, FormControl, HelpBlock, Row, Col } from 'react-bootstrap';
-import classNames from 'classnames';
-import find from 'lodash/find';
-import getVal from 'lodash/get';
-import LoadingIcon from '../common/loading-icon';
+import {
+  Button,
+  ControlLabel,
+  Form,
+  FormGroup,
+  FormControl,
+  HelpBlock,
+  Row,
+  Col
+} from "react-bootstrap";
+import classNames from "classnames";
+import find from "lodash/find";
+import getVal from "lodash/get";
+import LoadingIcon from "../common/loading-icon";
 
 const VALIDATION = {
-  displayName: ['isNotEmpty'],
-  opponentDisplayName: ['isNotEmpty']
+  displayName: ["isNotEmpty"],
+  opponentDisplayName: ["isNotEmpty"]
 };
 
 class CreateChallengeForm extends React.Component {
@@ -15,62 +24,77 @@ class CreateChallengeForm extends React.Component {
     this.state = {
       isFetching: false,
       validationState: {},
-      opponentKey: ''
+      opponentKey: ""
     };
     this.checkIfValid = this.checkIfValid.bind(this);
     this.doesFormHaveErrors = this.doesFormHaveErrors.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleOpponentDisplayNameChange = this.handleOpponentDisplayNameChange.bind(this);
+    this.handleOpponentDisplayNameChange = this.handleOpponentDisplayNameChange.bind(
+      this
+    );
   }
 
-  checkIfValid(name, value, defaultState = 'success') {
+  checkIfValid(name, value, defaultState = "success") {
     const { validationState } = this.state;
     const validators = VALIDATION[name];
 
-    if (validators && validators.includes('isNotEmpty') && value.length === 0) {
-      this.setState({ validationState: Object.assign(validationState, {
-        [name]: {
-          state: 'error',
-          description: 'Please enter a name!'
-        }
-      }) });
+    if (validators && validators.includes("isNotEmpty") && value.length === 0) {
+      this.setState({
+        validationState: Object.assign(validationState, {
+          [name]: {
+            state: "error",
+            description: "Please enter a name!"
+          }
+        })
+      });
       return;
     }
-    this.setState({ validationState: Object.assign(validationState, {
-      [name]: {
-        state: defaultState,
-        description: null
-      }
-    }) });
+    this.setState({
+      validationState: Object.assign(validationState, {
+        [name]: {
+          state: defaultState,
+          description: null
+        }
+      })
+    });
   }
 
   doesFormHaveErrors() {
     const { validationState } = this.state;
-    return find(validationState, s => s.state === 'error');
+    return find(validationState, s => s.state === "error");
   }
 
   async handleSubmit(e) {
-    const { displayName, opponentDisplayName, opponentKey, validationState } = this.state;
+    const {
+      displayName,
+      opponentDisplayName,
+      opponentKey,
+      validationState
+    } = this.state;
     const { onSubmit } = this.props;
 
     e.preventDefault();
     this.setState({ isFetching: true });
 
     if (!displayName) {
-      this.setState({ validationState: Object.assign(validationState, {
-        displayName: {
-          state: 'error',
-          description: 'Please enter a name!'
-        }
-      }) });
+      this.setState({
+        validationState: Object.assign(validationState, {
+          displayName: {
+            state: "error",
+            description: "Please enter a name!"
+          }
+        })
+      });
     }
     if (!opponentDisplayName || !opponentKey) {
-      this.setState({ validationState: Object.assign(validationState, {
-        opponentDisplayName: {
-          state: 'error',
-          description: 'Please enter your opponents name!'
-        }
-      }) });
+      this.setState({
+        validationState: Object.assign(validationState, {
+          opponentDisplayName: {
+            state: "error",
+            description: "Please enter your opponents name!"
+          }
+        })
+      });
     }
     if (this.doesFormHaveErrors()) {
       this.setState({ isFetching: false });
@@ -80,7 +104,7 @@ class CreateChallengeForm extends React.Component {
     await onSubmit({ displayName, opponentKey, opponentDisplayName });
   }
 
-  handleChange(name, defaultState = 'success') {
+  handleChange(name, defaultState = "success") {
     return e => {
       this.checkIfValid(name, e.target.value, defaultState);
       this.setState({ [name]: e.target.value });
@@ -92,34 +116,42 @@ class CreateChallengeForm extends React.Component {
     const { onOpponentDisplayNameChange, myNormalizedDisplayName } = this.props;
     const value = e.target.value;
 
-    this.handleChange('opponentDisplayName', null)(e);
+    this.handleChange("opponentDisplayName", null)(e);
 
     onOpponentDisplayNameChange(value, player => {
       if (myNormalizedDisplayName === value.toLowerCase()) {
-        this.setState({ validationState: Object.assign(validationState, {
-          opponentDisplayName: {
-            state: 'error',
-            description: 'You cannot challenge yourself, silly!'
-          }
-        }) });
+        this.setState({
+          validationState: Object.assign(validationState, {
+            opponentDisplayName: {
+              state: "error",
+              description: "You cannot challenge yourself, silly!"
+            }
+          })
+        });
       } else if (player) {
         this.setState({
           opponentKey: player.key,
           opponentDisplayName: player.displayName,
           validationState: Object.assign(validationState, {
             opponentDisplayName: {
-              state: 'success',
-              description: <span>Player <strong>{player.displayName}</strong> found!</span>
+              state: "success",
+              description: (
+                <span>Player <strong>{player.displayName}</strong> found!</span>
+              )
             }
           })
         });
       } else {
-        this.setState({ validationState: Object.assign(validationState, {
-          opponentDisplayName: {
-            state: 'error',
-            description: <span>Player <strong>{value}</strong> not found!</span>
-          }
-        }) });
+        this.setState({
+          validationState: Object.assign(validationState, {
+            opponentDisplayName: {
+              state: "error",
+              description: (
+                <span>Player <strong>{value}</strong> not found!</span>
+              )
+            }
+          })
+        });
       }
     });
   }
@@ -130,44 +162,60 @@ class CreateChallengeForm extends React.Component {
       <Form horizontal id="form-large" onSubmit={this.handleSubmit}>
         <FormGroup
           className="create-challenge-form-group"
-          validationState={getVal(validationState, 'displayName.state')}
+          validationState={getVal(validationState, "displayName.state")}
+        >
+          <Col
+            lg={5}
+            sm={4}
+            xs={12}
+            className="text-right"
+            componentClass={ControlLabel}
           >
-          <Col lg={5} sm={4} xs={12} className="text-right" componentClass={ControlLabel}>
             <div className="form-label">Name your challenge</div>
           </Col>
           <Col lg={4} sm={6} xs={12}>
             <FormControl
               type="text"
               placeholder="Cool challenge"
-              onChange={this.handleChange('displayName')}
-              />
-            <HelpBlock>{getVal(validationState, 'displayName.description')}</HelpBlock>
+              onChange={this.handleChange("displayName")}
+            />
+            <HelpBlock>
+              {getVal(validationState, "displayName.description")}
+            </HelpBlock>
           </Col>
         </FormGroup>
         <FormGroup
           className="create-challenge-form-group"
-          validationState={getVal(validationState, 'opponentDisplayName.state')}
+          validationState={getVal(validationState, "opponentDisplayName.state")}
+        >
+          <Col
+            lg={5}
+            sm={4}
+            xs={12}
+            className="text-right"
+            componentClass={ControlLabel}
           >
-          <Col lg={5} sm={4} xs={12} className="text-right" componentClass={ControlLabel}>
-            <div className="form-label">Type your opponent&#39;s name</div>
+            <div className="form-label">Type your opponent's name</div>
           </Col>
           <Col lg={4} sm={6} xs={12}>
-            <FormControl type="text" placeholder="Bill" onChange={this.handleOpponentDisplayNameChange}/>
-            <HelpBlock>{getVal(validationState, 'opponentDisplayName.description')}</HelpBlock>
+            <FormControl
+              type="text"
+              placeholder="Bill"
+              onChange={this.handleOpponentDisplayNameChange}
+            />
+            <HelpBlock>
+              {getVal(validationState, "opponentDisplayName.description")}
+            </HelpBlock>
           </Col>
         </FormGroup>
         <Row className="text-center margin-top-40">
           <Col sm={8} smOffset={2} lg={4} lgOffset={4}>
             <Button
               bsStyle="primary"
-              className={classNames('btn-lg', isFetching ? 'disabled' : '')}
+              className={classNames("btn-lg", isFetching ? "disabled" : "")}
               type="submit"
-              >
-              {
-                isFetching ?
-                  <LoadingIcon/> :
-                  'Create'
-              }
+            >
+              {isFetching ? <LoadingIcon /> : "Create"}
             </Button>
           </Col>
         </Row>

@@ -1,6 +1,6 @@
 const Logo = ({ imageWidth, fontSize }) => (
   <div className="center-align">
-    <img src="/static/boxing.png" width={imageWidth}/>
+    <img src="/static/boxing.png" width={imageWidth} />
     <div className="title-wrapper">
       <div className="title"><span style={{ fontSize }}>Duelour</span></div>
     </div>
@@ -23,8 +23,8 @@ Logo.propTypes = {
 };
 
 Logo.defaultProps = {
-  imageWidth: '300px',
-  fontSize: '50px'
+  imageWidth: "300px",
+  fontSize: "50px"
 };
 
 export default Logo;

@@ -1,7 +1,7 @@
-import { getPlayerInStorage } from '../../lib/data/players';
-import { signOut } from '../../lib/data/user';
-import Page from '../../document/page';
-import Header from './header';
+import { getPlayerInStorage } from "../../lib/data/players";
+import { signOut } from "../../lib/data/user";
+import Page from "../../document/page";
+import Header from "./header";
 
 class PageWithHeader extends React.Component {
   constructor(props, context) {
@@ -27,7 +27,7 @@ class PageWithHeader extends React.Component {
           player={player}
           title={title}
           onClickLogout={this.handleLogout}
-          />
+        />
         {children}
       </Page>
     );
@@ -40,7 +40,7 @@ PageWithHeader.propTypes = {
 };
 
 PageWithHeader.defaultProps = {
-  title: <div/>
+  title: <div />
 };
 
 export default PageWithHeader;
