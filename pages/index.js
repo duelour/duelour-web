@@ -3,8 +3,12 @@ import {
   getChallengesFromStorage,
   setChallengesInStorage
 } from '../lib/data/challenges';
-import { getPlayerChallenges } from '../lib/flows/challenges';
+import {
+  getPlayerChallenges,
+  acceptChallengeForPlayer
+} from '../lib/flows/challenges';
 import LoadingIcon from '../components/common/loading-icon';
+import Notification from '../components/common/notification';
 import PageWithHeader from '../components/common/page-with-header';
 import Challenges from '../components/challenges/index';
 
@@ -12,6 +16,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isFetching: true, challenges: [] };
+    this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this);
   }
 
   async componentDidMount() {
@@ -63,6 +68,18 @@ class Index extends React.Component {
     getPlayerChallenges.off(player.key, 'active');
   }
 
+  handleAcceptChallenge(challengeKey) {
+    return async () => {
+      const { player } = this.props;
+      try {
+        await acceptChallengeForPlayer(challengeKey, player.key);
+        this.notification.success('GAME ON! good luck! 🔥🔥');
+      } catch (err) {
+        this.notification.error("Error! Can't accept that challenge right now");
+      }
+    };
+  }
+
   render() {
     const { isFetching, challenges } = this.state;
     const { player } = this.props;
@@ -70,11 +87,20 @@ class Index extends React.Component {
       <PageWithHeader
         title={challenges.length > 0 ? <div>Your challenges</div> : <div />}
       >
+        <Notification
+          ref={notification => {
+            this.notification = notification;
+          }}
+        />
         {isFetching
           ? <div className="text-center">
               <LoadingIcon color="#ed5f59" width="100" />
             </div>
-          : <Challenges challenges={challenges} player={player} />}
+          : <Challenges
+              challenges={challenges}
+              player={player}
+              onClickAcceptChallenge={this.handleAcceptChallenge}
+            />}
       </PageWithHeader>
     );
   }

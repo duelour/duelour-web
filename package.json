@@ -23,7 +23,11 @@
     "setupTestFrameworkScriptFile": "./lib/data/__mocks__/local-storage.mock.js"
   },
   "xo": {
-    "extends": ["xo-react", "prettier", "prettier/react"],
+    "extends": [
+      "xo-react",
+      "prettier",
+      "prettier/react"
+    ],
     "space": true,
     "rules": {
       "object-curly-spacing": [
@@ -34,7 +38,9 @@
       "react/no-danger": 0,
       "react/forbid-component-props": 0,
       "react/jsx-indent": 0,
-      "react/no-unescaped-entities": 0
+      "react/jsx-indent-props": 0,
+      "react/no-unescaped-entities": 0,
+      "react/jsx-no-bind": 0
     },
     "globals": [
       "window",
@@ -60,7 +66,8 @@
     "q": "^1.5.0",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-notification": "^6.6.0"
   },
   "devDependencies": {
     "autoprefixer": "6.7.6",

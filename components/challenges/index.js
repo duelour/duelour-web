@@ -4,7 +4,7 @@ import getVal from 'lodash/get';
 import ChallengesSection from './challenges-section';
 import NoChallenges from './no-challenges';
 
-const Challenges = ({ challenges, player }) => {
+const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
   if (
     getVal(challenges, 'active.length', 0) === 0 &&
     getVal(challenges, 'pending.length', 0) === 0
@@ -26,6 +26,7 @@ const Challenges = ({ challenges, player }) => {
           type="pending"
           challenges={challenges.pending}
           player={player}
+          onClickAcceptChallenge={onClickAcceptChallenge}
         />}
       {getVal(challenges, 'active.length', 0) > 0 &&
         <ChallengesSection
@@ -45,6 +46,7 @@ const Challenges = ({ challenges, player }) => {
 
 Challenges.propTypes = {
   challenges: React.PropTypes.object.isRequired,
+  onClickAcceptChallenge: React.PropTypes.func.isRequired,
   player: React.PropTypes.object.isRequired
 };
 

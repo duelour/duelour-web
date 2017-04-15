@@ -24,7 +24,13 @@ const warningPopover = (allPlayers, myPlayer) => {
   );
 };
 
-const ChallengesSection = ({ challenges, player, type, title }) => {
+const ChallengesSection = ({
+  challenges,
+  onClickAcceptChallenge,
+  player,
+  type,
+  title
+}) => {
   return (
     <div>
       <Row>
@@ -36,7 +42,7 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
         {challenges &&
           challenges.map(challenge => (
             <Col key={challenge.key} lg={3} md={4} sm={6} xs={12}>
-              <Well>
+              <Well style={{ padding: 0, display: 'flex' }}>
                 {type === 'active' &&
                   challenge.status === 'pending' &&
                   <OverlayTrigger
@@ -69,25 +75,53 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
                   {stringifyOpponents(challenge.players, player.displayName)}
                   )
                 </div>
+                {type === 'pending' &&
+                  <div
+                    className="accept-button"
+                    onClick={onClickAcceptChallenge(challenge.key)}
+                  >
+                    <i className="material-icons accept">check</i>
+                  </div>}
               </Well>
             </Col>
           ))}
       </Row>
       <style jsx>{`
         i {
-          position: absolute;
-          margin-top: 15px;
-          margin-left: 5px;
+          display: flex;
+          align-items: center;
           cursor: pointer;
         }
         .warning {
           color: #f39c12;
+          margin-left: 15px;
         }
         .error {
           color: #ed5f59;
+          margin-left: 15px;
+        }
+        .accept-button {
+          display: flex;
+          align-items: center;
+          background-color: #2ecc71;
+          cursor: pointer;
+        }
+        .accept-button:hover {
+          background-color: #27ae60;
+        }
+        .accept-button:active {
+          background-color: #259f59;
+        }
+        .accept {
+          padding-right: 15px;
+          padding-left: 15px;
+          color: white;
         }
         .challenge-name {
+          padding-top: 10px;
+          padding-bottom: 10px;
           font-size: 20px;
+          flex-grow: 1;
         }
       `}</style>
     </div>
@@ -96,9 +130,14 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
 
 ChallengesSection.propTypes = {
   challenges: React.PropTypes.array.isRequired,
+  onClickAcceptChallenge: React.PropTypes.func,
   player: React.PropTypes.object.isRequired,
   title: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired
+};
+
+ChallengesSection.defaultProps = {
+  onClickAcceptChallenge: () => {}
 };
 
 export default ChallengesSection;
