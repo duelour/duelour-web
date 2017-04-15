@@ -12,6 +12,9 @@
     "test:watch": "jest --watch"
   },
   "license": "MIT",
+  "jest": {
+    "setupTestFrameworkScriptFile": "./lib/data/__mocks__/local-storage.mock.js"
+  },
   "xo": {
     "extends": "xo-react",
     "space": true,
