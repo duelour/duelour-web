@@ -33,7 +33,8 @@ class Notification extends React.Component {
               fontSize: '16px',
               padding: '15px',
               fontWeight: 'bold',
-              boxShadow: 'none'
+              boxShadow: 'none',
+              zIndex: '9999'
             },
             barStyle
           ),
