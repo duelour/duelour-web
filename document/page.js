@@ -1,6 +1,6 @@
-import React, { PropTypes } from "react";
-import { Grid } from "react-bootstrap";
-import Header from "./header";
+import React, { PropTypes } from 'react';
+import { Grid } from 'react-bootstrap';
+import Header from './header';
 
 const Page = ({ children }) => (
   <div>

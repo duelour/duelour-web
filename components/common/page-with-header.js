@@ -1,7 +1,7 @@
-import { getPlayerInStorage } from "../../lib/data/players";
-import { signOut } from "../../lib/data/user";
-import Page from "../../document/page";
-import Header from "./header";
+import { getPlayerInStorage } from '../../lib/data/players';
+import { signOut } from '../../lib/data/user';
+import Page from '../../document/page';
+import Header from './header';
 
 class PageWithHeader extends React.Component {
   constructor(props, context) {

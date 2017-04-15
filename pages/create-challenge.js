@@ -1,12 +1,12 @@
-import Router from "next/router";
-import debounce from "lodash/debounce";
-import withFirebase from "../lib/with-firebase";
-import { normalizeFbObject } from "../lib/data/firebase";
-import { createChallengeForPlayer } from "../lib/flows/challenges";
-import { findPlayerByDisplayNameOnce } from "../lib/data/players";
-import PageWithHeader from "../components/common/page-with-header";
+import Router from 'next/router';
+import debounce from 'lodash/debounce';
+import withFirebase from '../lib/with-firebase';
+import { normalizeFbObject } from '../lib/data/firebase';
+import { createChallengeForPlayer } from '../lib/flows/challenges';
+import { findPlayerByDisplayNameOnce } from '../lib/data/players';
+import PageWithHeader from '../components/common/page-with-header';
 import CreateChallengeForm
-  from "../components/challenges/create-challenge-form";
+  from '../components/challenges/create-challenge-form';
 
 class CreateChallenge extends React.Component {
   constructor(props) {
@@ -33,9 +33,9 @@ class CreateChallenge extends React.Component {
 
     try {
       await createChallengeForPlayer(displayName, players, player.key);
-      Router.push("/");
+      Router.push('/');
     } catch (err) {
-      console.log("Error creating challenge ", err);
+      console.log('Error creating challenge ', err);
     }
   }
 

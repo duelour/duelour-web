@@ -1,12 +1,12 @@
-import withFirebase from "../lib/with-firebase";
+import withFirebase from '../lib/with-firebase';
 import {
   getChallengesFromStorage,
   setChallengesInStorage
-} from "../lib/data/challenges";
-import { getPlayerChallenges } from "../lib/flows/challenges";
-import LoadingIcon from "../components/common/loading-icon";
-import PageWithHeader from "../components/common/page-with-header";
-import Challenges from "../components/challenges/index";
+} from '../lib/data/challenges';
+import { getPlayerChallenges } from '../lib/flows/challenges';
+import LoadingIcon from '../components/common/loading-icon';
+import PageWithHeader from '../components/common/page-with-header';
+import Challenges from '../components/challenges/index';
 
 class Index extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class Index extends React.Component {
           })
         });
       },
-      "pending"
+      'pending'
     );
 
     getPlayerChallenges.on(
@@ -53,14 +53,14 @@ class Index extends React.Component {
           })
         });
       },
-      "active"
+      'active'
     );
   }
 
   componentWillUnmount() {
     const { player } = this.props;
-    getPlayerChallenges.off(player.key, "pending");
-    getPlayerChallenges.off(player.key, "active");
+    getPlayerChallenges.off(player.key, 'pending');
+    getPlayerChallenges.off(player.key, 'active');
   }
 
   render() {

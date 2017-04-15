@@ -31,8 +31,8 @@ LoadingIcon.propTypes = {
 };
 
 LoadingIcon.defaultProps = {
-  width: "40px",
-  color: "white"
+  width: '40px',
+  color: 'white'
 };
 
 export default LoadingIcon;

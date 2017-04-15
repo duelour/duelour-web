@@ -1,13 +1,13 @@
-import { Row, Col } from "react-bootstrap";
-import Link from "next/link";
-import getVal from "lodash/get";
-import ChallengesSection from "./challenges-section";
-import NoChallenges from "./no-challenges";
+import { Row, Col } from 'react-bootstrap';
+import Link from 'next/link';
+import getVal from 'lodash/get';
+import ChallengesSection from './challenges-section';
+import NoChallenges from './no-challenges';
 
 const Challenges = ({ challenges, player }) => {
   if (
-    getVal(challenges, "active.length", 0) === 0 &&
-    getVal(challenges, "pending.length", 0) === 0
+    getVal(challenges, 'active.length', 0) === 0 &&
+    getVal(challenges, 'pending.length', 0) === 0
   ) {
     return <NoChallenges />;
   }
@@ -20,14 +20,14 @@ const Challenges = ({ challenges, player }) => {
           </Link>
         </Col>
       </Row>
-      {getVal(challenges, "pending.length", 0) > 0 &&
+      {getVal(challenges, 'pending.length', 0) > 0 &&
         <ChallengesSection
           title="Challenges pending approval"
           type="pending"
           challenges={challenges.pending}
           player={player}
         />}
-      {getVal(challenges, "active.length", 0) > 0 &&
+      {getVal(challenges, 'active.length', 0) > 0 &&
         <ChallengesSection
           title="Active challenges"
           type="active"

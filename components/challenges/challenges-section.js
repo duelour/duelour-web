@@ -1,9 +1,9 @@
-import { Row, Col, Well, OverlayTrigger, Popover } from "react-bootstrap";
-import pull from "lodash/pull";
+import { Row, Col, Well, OverlayTrigger, Popover } from 'react-bootstrap';
+import pull from 'lodash/pull';
 
 const stringifyOpponents = (allPlayers, myPlayer) => {
   const opponents = pull(Object.values(allPlayers), myPlayer);
-  return opponents.join(", ");
+  return opponents.join(', ');
 };
 
 const pendingPopover = (allPlayers, myPlayer) => {
@@ -37,11 +37,11 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
           challenges.map(challenge => (
             <Col key={challenge.key} lg={3} md={4} sm={6} xs={12}>
               <Well>
-                {type === "active" &&
-                  challenge.status === "pending" &&
+                {type === 'active' &&
+                  challenge.status === 'pending' &&
                   <OverlayTrigger
                     rootClose
-                    trigger={["hover", "click"]}
+                    trigger={['hover', 'click']}
                     placement="top"
                     overlay={warningPopover(
                       challenge.players,
@@ -50,10 +50,10 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
                   >
                     <i className="error material-icons">error</i>
                   </OverlayTrigger>}
-                {type === "pending" &&
+                {type === 'pending' &&
                   <OverlayTrigger
                     rootClose
-                    trigger={["hover", "click"]}
+                    trigger={['hover', 'click']}
                     placement="top"
                     overlay={pendingPopover(
                       challenge.players,
@@ -65,7 +65,7 @@ const ChallengesSection = ({ challenges, player, type, title }) => {
                 <div className="challenge-name text-center">
                   <strong>{challenge.displayName}</strong><br />
                   (vs.
-                  {" "}
+                  {' '}
                   {stringifyOpponents(challenge.players, player.displayName)}
                   )
                 </div>

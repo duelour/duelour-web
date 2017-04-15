@@ -23,8 +23,8 @@ Logo.propTypes = {
 };
 
 Logo.defaultProps = {
-  imageWidth: "300px",
-  fontSize: "50px"
+  imageWidth: '300px',
+  fontSize: '50px'
 };
 
 export default Logo;

@@ -1,12 +1,12 @@
-import { Row, Col } from "react-bootstrap";
-import Logo from "./logo";
+import { Row, Col } from 'react-bootstrap';
+import Logo from './logo';
 
 const Header = ({ player, onClickLogout, title }) => {
   return (
     <div>
       <Row
         className="hidden-lg hidden-md hidden-sm text-right"
-        style={{ marginTop: "10px" }}
+        style={{ marginTop: '10px' }}
       >
         <Col xs={12}>
           <a href="#" onClick={onClickLogout}>Logout</a>
