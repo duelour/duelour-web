@@ -2,24 +2,28 @@ import { Row, Col, Well, OverlayTrigger, Popover } from 'react-bootstrap';
 import pull from 'lodash/pull';
 
 const stringifyOpponents = (allPlayers, myPlayer) => {
-  const opponents = pull(Object.values(allPlayers), myPlayer);
-  return opponents.join(', ');
+  const opponents = Object.values(allPlayers);
+  const opponentNames = pull(
+    opponents.map(player => player.displayName),
+    myPlayer
+  );
+  return opponentNames.join(', ');
 };
 
 const pendingPopover = (allPlayers, myPlayer) => {
-  const opponents = pull(Object.values(allPlayers), myPlayer);
+  const opponents = stringifyOpponents(allPlayers, myPlayer);
   return (
     <Popover id="pending-popover">
-      <strong>{opponents[0]}</strong> wants to challenge you!
+      <strong>{opponents}</strong> wants to challenge you!
     </Popover>
   );
 };
 
 const warningPopover = (allPlayers, myPlayer) => {
-  const opponents = pull(Object.values(allPlayers), myPlayer);
+  const opponents = stringifyOpponents(allPlayers, myPlayer);
   return (
     <Popover id="pending-popover">
-      <strong>{opponents[0]}</strong> has not accepted their challenge yet!
+      <strong>{opponents}</strong> has not accepted their challenge yet!
     </Popover>
   );
 };
