@@ -3,7 +3,7 @@ import Router from 'next/router';
 import isEmpty from 'lodash/isEmpty';
 
 import withFirebase from '../lib/with-firebase';
-import { signInPlayer, registerPlayer } from '../lib/flows/user';
+import { signInPlayer, registerPlayer } from '../lib/controllers/user';
 import {
   findPlayerByDisplayNameOnce,
   setPlayerInStorage

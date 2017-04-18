@@ -2,7 +2,7 @@ import Router from 'next/router';
 import debounce from 'lodash/debounce';
 import withFirebase from '../lib/with-firebase';
 import { normalizeFbObject } from '../lib/data/firebase';
-import { createChallengeForPlayer } from '../lib/flows/challenges';
+import { createChallengeForPlayer } from '../lib/controllers/challenges';
 import { findPlayerByDisplayNameOnce } from '../lib/data/players';
 import PageWithHeader from '../components/common/page-with-header';
 import CreateChallengeForm

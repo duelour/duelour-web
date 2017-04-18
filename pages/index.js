@@ -6,7 +6,7 @@ import {
 import {
   getPlayerChallenges,
   acceptChallengeForPlayer
-} from '../lib/flows/challenges';
+} from '../lib/controllers/challenges';
 import LoadingIcon from '../components/common/loading-icon';
 import Notification from '../components/common/notification';
 import PageWithHeader from '../components/common/page-with-header';
