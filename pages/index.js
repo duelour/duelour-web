@@ -30,11 +30,6 @@ class Index extends React.Component {
     getPlayerChallenges.on(
       player.key,
       pendingChallenges => {
-        setChallengesInStorage(
-          Object.assign({}, challengesFromStorage, {
-            pending: pendingChallenges
-          })
-        );
         this.setState({
           isFetching: false,
           challenges: Object.assign({}, this.state.challenges, {
