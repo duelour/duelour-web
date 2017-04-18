@@ -23,13 +23,11 @@ class CreateChallenge extends React.Component {
     const players = [
       {
         key: player.key,
-        displayName: player.displayName,
-        hasPlayerAccepted: true
+        displayName: player.displayName
       },
       {
         key: opponentKey,
-        displayName: opponentDisplayName,
-        hasPlayerAccepted: false
+        displayName: opponentDisplayName
       }
     ];
 

@@ -53,6 +53,7 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "bootflat": "^2.0.4",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
