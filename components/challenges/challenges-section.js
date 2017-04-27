@@ -28,109 +28,126 @@ const warningPopover = (allPlayers, myPlayer) => {
   );
 };
 
-const ChallengesSection = ({
-  challenges,
-  onClickAcceptChallenge,
-  player,
-  type,
-  title
-}) => {
-  return (
-    <div>
-      <Row>
-        <Col xs={12}>
-          <h3>{title}</h3>
-        </Col>
-      </Row>
-      <Row>
-        {challenges &&
-          challenges.map(challenge => (
-            <Col key={challenge.key} lg={3} md={4} sm={6} xs={12}>
-              <Well style={{ padding: 0, display: 'flex' }}>
-                {type === 'active' &&
-                  challenge.status === 'pending' &&
-                  <OverlayTrigger
-                    rootClose
-                    trigger={['hover', 'click']}
-                    placement="top"
-                    overlay={warningPopover(
-                      challenge.players,
-                      player.displayName
-                    )}
-                  >
-                    <i className="error material-icons">error</i>
-                  </OverlayTrigger>}
-                {type === 'pending' &&
-                  <OverlayTrigger
-                    rootClose
-                    trigger={['hover', 'click']}
-                    placement="top"
-                    overlay={pendingPopover(
-                      challenge.players,
-                      player.displayName
-                    )}
-                  >
-                    <i className="warning material-icons">warning</i>
-                  </OverlayTrigger>}
-                <div className="challenge-name text-center">
-                  <strong>{challenge.displayName}</strong><br />
-                  (vs.
-                  {' '}
-                  {stringifyOpponents(challenge.players, player.displayName)}
-                  )
-                </div>
-                {type === 'pending' &&
-                  <div
-                    className="accept-button"
-                    onClick={onClickAcceptChallenge(challenge.key)}
-                  >
-                    <i className="material-icons accept">check</i>
-                  </div>}
-              </Well>
-            </Col>
-          ))}
-      </Row>
-      <style jsx>{`
-        i {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-        }
-        .warning {
-          color: #f39c12;
-          margin-left: 15px;
-        }
-        .error {
-          color: #ed5f59;
-          margin-left: 15px;
-        }
-        .accept-button {
-          display: flex;
-          align-items: center;
-          background-color: #2ecc71;
-          cursor: pointer;
-        }
-        .accept-button:hover {
-          background-color: #27ae60;
-        }
-        .accept-button:active {
-          background-color: #259f59;
-        }
-        .accept {
-          padding-right: 15px;
-          padding-left: 15px;
-          color: white;
-        }
-        .challenge-name {
-          padding-top: 10px;
-          padding-bottom: 10px;
-          font-size: 20px;
-          flex-grow: 1;
-        }
-      `}</style>
-    </div>
-  );
-};
+class ChallengesSection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLoading: false };
+    this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this);
+  }
+
+  async handleAcceptChallenge(challengeKey) {
+    const { onClickAcceptChallenge } = this.props;
+
+    this.setState({ isLoading: true });
+    try {
+      await onClickAcceptChallenge(challengeKey);
+      this.setState({ isLoading: false });
+    } catch (err) {
+      this.setState({ isLoading: false });
+    }
+  }
+
+  render() {
+    const { challenges, player, type, title } = this.props;
+    return (
+      <div>
+        <Row>
+          <Col xs={12}>
+            <h3>{title}</h3>
+          </Col>
+        </Row>
+        <Row>
+          {challenges &&
+            challenges.map(challenge => (
+              <Col key={challenge.key} lg={3} md={4} sm={6} xs={12}>
+                <Well style={{ padding: 0, display: 'flex' }}>
+                  {type === 'active' &&
+                    challenge.status === 'pending' &&
+                    <OverlayTrigger
+                      rootClose
+                      trigger={['hover', 'click']}
+                      placement="top"
+                      overlay={warningPopover(
+                        challenge.players,
+                        player.displayName
+                      )}
+                    >
+                      <i className="error material-icons">error</i>
+                    </OverlayTrigger>}
+                  {type === 'pending' &&
+                    <OverlayTrigger
+                      rootClose
+                      trigger={['hover', 'click']}
+                      placement="top"
+                      overlay={pendingPopover(
+                        challenge.players,
+                        player.displayName
+                      )}
+                    >
+                      <i className="warning material-icons">warning</i>
+                    </OverlayTrigger>}
+                  <div className="challenge-name text-center">
+                    <strong>{challenge.displayName}</strong><br />
+                    (vs.
+                    {' '}
+                    {stringifyOpponents(challenge.players, player.displayName)}
+                    )
+                  </div>
+                  {type === 'pending' &&
+                    <div
+                      className="accept-button"
+                      onClick={this.handleAcceptChallenge(challenge.key)}
+                    >
+                      <i className="accept material-icons">check</i>
+                    </div>}
+                </Well>
+              </Col>
+            ))}
+        </Row>
+        <style jsx>{`
+          i {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+          }
+          .warning {
+            color: #f39c12;
+            margin-left: 15px;
+          }
+          .error {
+            color: #ed5f59;
+            margin-left: 15px;
+          }
+          .accept-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2ecc71;
+            cursor: pointer;
+            width: 40px;
+          }
+          .accept-button:hover {
+            background-color: #27ae60;
+          }
+          .accept-button:active {
+            background-color: #259f59;
+          }
+          .accept {
+            padding-right: 15px;
+            padding-left: 15px;
+            color: white;
+          }
+          .challenge-name {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 20px;
+            flex-grow: 1;
+          }
+        `}</style>
+      </div>
+    );
+  }
+}
 
 ChallengesSection.propTypes = {
   challenges: React.PropTypes.array.isRequired,

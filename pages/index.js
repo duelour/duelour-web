@@ -68,9 +68,11 @@ class Index extends React.Component {
       const { player } = this.props;
       try {
         await acceptChallengeForPlayer(challengeKey, player.key);
-        this.notification.success('GAME ON! good luck! 🔥🔥');
+        return this.notification.success('GAME ON! good luck! 🔥🔥');
       } catch (err) {
-        this.notification.error("Error! Can't accept that challenge right now");
+        return this.notification.error(
+          "Error! Can't accept that challenge right now"
+        );
       }
     };
   }

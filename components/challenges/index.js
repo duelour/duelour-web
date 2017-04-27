@@ -12,7 +12,7 @@ const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
     return <NoChallenges />;
   }
   return (
-    <div>
+    <div className="challenges-wrapper">
       <Row>
         <Col xs={12}>
           <Link href="create-challenge">
@@ -38,6 +38,12 @@ const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
       <style jsx>{`
         a {
           font-size: 20px;
+        }
+        @media screen and (max-width: 768px) {
+          .challenges-wrapper {
+            position: absolute;
+            top: 10px;
+          }
         }
       `}</style>
     </div>
