@@ -1,5 +1,6 @@
 import { Row, Col, Well, OverlayTrigger, Popover } from 'react-bootstrap';
 import pull from 'lodash/pull';
+import LoadingIcon from '../common/loading-icon';
 
 const stringifyOpponents = (allPlayers, myPlayer) => {
   const opponents = Object.values(allPlayers);
@@ -35,20 +36,22 @@ class ChallengesSection extends React.Component {
     this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this);
   }
 
-  async handleAcceptChallenge(challengeKey) {
-    const { onClickAcceptChallenge } = this.props;
-
-    this.setState({ isLoading: true });
-    try {
-      await onClickAcceptChallenge(challengeKey);
-      this.setState({ isLoading: false });
-    } catch (err) {
-      this.setState({ isLoading: false });
-    }
+  handleAcceptChallenge(challengeKey) {
+    return async () => {
+      const { onClickAcceptChallenge } = this.props;
+      this.setState({ isLoading: true });
+      try {
+        await onClickAcceptChallenge(challengeKey);
+        this.setState({ isLoading: false });
+      } catch (err) {
+        this.setState({ isLoading: false });
+      }
+    };
   }
 
   render() {
     const { challenges, player, type, title } = this.props;
+    const { isLoading } = this.state;
     return (
       <div>
         <Row>
@@ -95,10 +98,16 @@ class ChallengesSection extends React.Component {
                   </div>
                   {type === 'pending' &&
                     <div
-                      className="accept-button"
+                      className={
+                        isLoading
+                          ? 'accept-button disabled-button'
+                          : 'accept-button'
+                      }
                       onClick={this.handleAcceptChallenge(challenge.key)}
                     >
-                      <i className="accept material-icons">check</i>
+                      {isLoading
+                        ? <LoadingIcon width={24} />
+                        : <i className="accept material-icons">check</i>}
                     </div>}
                 </Well>
               </Col>
@@ -131,6 +140,13 @@ class ChallengesSection extends React.Component {
           }
           .accept-button:active {
             background-color: #259f59;
+          }
+          .disabled-button {
+            background-color: #83c7a0;
+            cursor: not-allowed;
+          }
+          .disabled-button:hover {
+            background-color: #83c7a0;
           }
           .accept {
             padding-right: 15px;

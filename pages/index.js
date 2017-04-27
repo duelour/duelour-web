@@ -63,18 +63,16 @@ class Index extends React.Component {
     getPlayerChallenges.off(player.key, 'active');
   }
 
-  handleAcceptChallenge(challengeKey) {
-    return async () => {
-      const { player } = this.props;
-      try {
-        await acceptChallengeForPlayer(challengeKey, player.key);
-        return this.notification.success('GAME ON! good luck! 🔥🔥');
-      } catch (err) {
-        return this.notification.error(
-          "Error! Can't accept that challenge right now"
-        );
-      }
-    };
+  async handleAcceptChallenge(challengeKey) {
+    const { player } = this.props;
+    try {
+      await acceptChallengeForPlayer(challengeKey, player.key);
+      return this.notification.success('GAME ON! good luck! 🔥🔥');
+    } catch (err) {
+      return this.notification.error(
+        "Error! Can't accept that challenge right now"
+      );
+    }
   }
 
   render() {
