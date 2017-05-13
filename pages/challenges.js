@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Row, Col, Label, Panel, Table } from 'react-bootstrap';
+import { Row, Col, Label } from 'react-bootstrap';
 import withFirebase from '../lib/with-firebase';
 import { findChallengeByChallengeIdOnce } from '../lib/data/challenges';
 import PageWithHeader from '../components/common/page-with-header';
