@@ -32,26 +32,26 @@ const warningPopover = (allPlayers, myPlayer) => {
 class ChallengesSection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: false };
+    this.state = { isLoading: false, loadingKey: null };
     this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this);
   }
 
   handleAcceptChallenge(challengeKey) {
     return async () => {
       const { onClickAcceptChallenge } = this.props;
-      this.setState({ isLoading: true });
+      this.setState({ isLoading: true, loadingKey: challengeKey });
       try {
         await onClickAcceptChallenge(challengeKey);
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: false, loadingKey: null });
       } catch (err) {
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: false, loadingKey: null });
       }
     };
   }
 
   render() {
     const { challenges, onClickChallenge, player, type, title } = this.props;
-    const { isLoading } = this.state;
+    const { isLoading, loadingKey } = this.state;
     return (
       <div>
         <Row>
@@ -63,10 +63,7 @@ class ChallengesSection extends React.Component {
           {challenges &&
             challenges.map(challenge => (
               <Col key={challenge.key} lg={3} md={4} sm={6} xs={12}>
-                <Well
-                  className="challenge-well"
-                  onClick={onClickChallenge(challenge.key)}
-                >
+                <Well className="challenge-well">
                   {type === 'active' &&
                     challenge.status === 'pending' &&
                     <OverlayTrigger
@@ -92,7 +89,10 @@ class ChallengesSection extends React.Component {
                     >
                       <i className="warning material-icons">warning</i>
                     </OverlayTrigger>}
-                  <div className="challenge-name text-center">
+                  <div
+                    className="challenge-name text-center"
+                    onClick={onClickChallenge(challenge.key)}
+                  >
                     <strong>{challenge.displayName}</strong><br />
                     (vs.
                     {' '}
@@ -102,13 +102,13 @@ class ChallengesSection extends React.Component {
                   {type === 'pending' &&
                     <div
                       className={
-                        isLoading
+                        isLoading && loadingKey === challenge.key
                           ? 'accept-button disabled-button'
                           : 'accept-button'
                       }
                       onClick={this.handleAcceptChallenge(challenge.key)}
                     >
-                      {isLoading
+                      {isLoading && loadingKey === challenge.key
                         ? <LoadingIcon width={24} />
                         : <i className="accept material-icons">check</i>}
                     </div>}
