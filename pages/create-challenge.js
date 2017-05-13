@@ -1,4 +1,5 @@
 import Router from 'next/router';
+import Link from 'next/link';
 import debounce from 'lodash/debounce';
 import withFirebase from '../lib/with-firebase';
 import { normalizeFbObject } from '../lib/data/firebase';
@@ -32,8 +33,12 @@ class CreateChallenge extends React.Component {
     ];
 
     try {
-      await createChallengeForPlayer(displayName, players, player.key);
-      Router.push('/');
+      const res = await createChallengeForPlayer(
+        displayName,
+        players,
+        player.key
+      );
+      Router.push(`/challenges?key=${res.data.key}`);
     } catch (err) {
       console.log('Error creating challenge ', err);
     }
@@ -53,7 +58,12 @@ class CreateChallenge extends React.Component {
   render() {
     const { player } = this.props;
     return (
-      <PageWithHeader title={<div>Create a challenge</div>}>
+      <PageWithHeader title={<div>Create a challenge</div>} goBackPath="/">
+        <Link href="/">
+          <a className="go-back hidden-xs">
+            <i className="material-icons big-ass-icon">chevron_left</i>
+          </a>
+        </Link>
         <CreateChallengeForm
           myNormalizedDisplayName={player.normalizedDisplayName}
           onOpponentDisplayNameChange={debounce(

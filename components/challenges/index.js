@@ -4,7 +4,12 @@ import getVal from 'lodash/get';
 import ChallengesSection from './challenges-section';
 import NoChallenges from './no-challenges';
 
-const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
+const Challenges = ({
+  challenges,
+  onClickAcceptChallenge,
+  onClickChallenge,
+  player
+}) => {
   if (
     getVal(challenges, 'active.length', 0) === 0 &&
     getVal(challenges, 'pending.length', 0) === 0
@@ -27,6 +32,7 @@ const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
           challenges={challenges.pending}
           player={player}
           onClickAcceptChallenge={onClickAcceptChallenge}
+          onClickChallenge={onClickChallenge}
         />}
       {getVal(challenges, 'active.length', 0) > 0 &&
         <ChallengesSection
@@ -34,6 +40,7 @@ const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
           type="active"
           challenges={challenges.active}
           player={player}
+          onClickChallenge={onClickChallenge}
         />}
       <style jsx>{`
         a {
@@ -42,7 +49,7 @@ const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
         @media screen and (max-width: 768px) {
           .challenges-wrapper {
             position: absolute;
-            top: 10px;
+            top: 30px;
           }
         }
       `}</style>
@@ -53,6 +60,7 @@ const Challenges = ({ challenges, onClickAcceptChallenge, player }) => {
 Challenges.propTypes = {
   challenges: React.PropTypes.object.isRequired,
   onClickAcceptChallenge: React.PropTypes.func.isRequired,
+  onClickChallenge: React.PropTypes.func.isRequired,
   player: React.PropTypes.object.isRequired
 };
 

@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import withFirebase from '../lib/with-firebase';
 import {
   getChallengesFromStorage,
@@ -75,6 +76,15 @@ class Index extends React.Component {
     }
   }
 
+  handleGoToChallenge(challengeKey) {
+    return () => {
+      Router.push({
+        pathname: '/challenges',
+        query: { key: challengeKey }
+      });
+    };
+  }
+
   render() {
     const { isFetching, challenges } = this.state;
     const { player } = this.props;
@@ -95,6 +105,7 @@ class Index extends React.Component {
               challenges={challenges}
               player={player}
               onClickAcceptChallenge={this.handleAcceptChallenge}
+              onClickChallenge={this.handleGoToChallenge}
             />}
       </PageWithHeader>
     );

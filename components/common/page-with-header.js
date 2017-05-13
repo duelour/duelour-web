@@ -19,13 +19,14 @@ class PageWithHeader extends React.Component {
   }
 
   render() {
-    const { children, title } = this.props;
+    const { children, goBackPath, title } = this.props;
     const { player } = this.state;
     return (
       <Page>
         <Header
           player={player}
           title={title}
+          goBackPath={goBackPath}
           onClickLogout={this.handleLogout}
         />
         {children}
@@ -36,10 +37,12 @@ class PageWithHeader extends React.Component {
 
 PageWithHeader.propTypes = {
   children: React.PropTypes.node.isRequired,
+  goBackPath: React.PropTypes.string,
   title: React.PropTypes.object
 };
 
 PageWithHeader.defaultProps = {
+  goBackPath: null,
   title: <div />
 };
 

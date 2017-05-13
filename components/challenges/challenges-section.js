@@ -50,7 +50,7 @@ class ChallengesSection extends React.Component {
   }
 
   render() {
-    const { challenges, player, type, title } = this.props;
+    const { challenges, onClickChallenge, player, type, title } = this.props;
     const { isLoading } = this.state;
     return (
       <div>
@@ -63,7 +63,10 @@ class ChallengesSection extends React.Component {
           {challenges &&
             challenges.map(challenge => (
               <Col key={challenge.key} lg={3} md={4} sm={6} xs={12}>
-                <Well style={{ padding: 0, display: 'flex' }}>
+                <Well
+                  className="challenge-well"
+                  onClick={onClickChallenge(challenge.key)}
+                >
                   {type === 'active' &&
                     challenge.status === 'pending' &&
                     <OverlayTrigger
@@ -160,6 +163,19 @@ class ChallengesSection extends React.Component {
             flex-grow: 1;
           }
         `}</style>
+        <style global jsx>{`
+          .challenge-well {
+            padding: 0 !important;
+            display: flex !important;
+          }
+          .challenge-well:hover {
+            background-color: #f7f7f7;
+            cursor: pointer;
+          }
+          .challenge-well:active {
+            background-color: #e8e8e8;
+          }
+        `}</style>
       </div>
     );
   }
@@ -168,13 +184,15 @@ class ChallengesSection extends React.Component {
 ChallengesSection.propTypes = {
   challenges: React.PropTypes.array.isRequired,
   onClickAcceptChallenge: React.PropTypes.func,
+  onClickChallenge: React.PropTypes.func,
   player: React.PropTypes.object.isRequired,
   title: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired
 };
 
 ChallengesSection.defaultProps = {
-  onClickAcceptChallenge: () => {}
+  onClickAcceptChallenge: null,
+  onClickChallenge: null
 };
 
 export default ChallengesSection;

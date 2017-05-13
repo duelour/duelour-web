@@ -1,14 +1,23 @@
 import { Row, Col } from 'react-bootstrap';
+import Link from 'next/link';
 import Logo from './logo';
 
-const Header = ({ player, onClickLogout, title }) => {
+const Header = ({ player, goBackPath, onClickLogout, title }) => {
   return (
     <div>
       <Row
-        className="hidden-lg hidden-md hidden-sm text-right"
+        className="hidden-lg hidden-md hidden-sm"
         style={{ marginTop: '10px' }}
       >
-        <Col xs={12}>
+        <Col xs={6} style={{ paddingLeft: '5px' }}>
+          {goBackPath &&
+            <Link href={goBackPath}>
+              <a className="go-back-mobile">
+                <i className="material-icons">chevron_left</i> Go back
+              </a>
+            </Link>}
+        </Col>
+        <Col xs={6} className="text-right">
           <a href="#" onClick={onClickLogout}>Logout</a>
         </Col>
       </Row>
@@ -73,6 +82,11 @@ const Header = ({ player, onClickLogout, title }) => {
             font-size: 16px;
           }
         }
+
+        .go-back-mobile {
+          display: flex;
+          align-items: center;
+        }
       `}</style>
     </div>
   );
@@ -80,11 +94,13 @@ const Header = ({ player, onClickLogout, title }) => {
 
 Header.propTypes = {
   player: React.PropTypes.object,
+  goBackPath: React.PropTypes.string,
   onClickLogout: React.PropTypes.func.isRequired,
   title: React.PropTypes.object.isRequired
 };
 
 Header.defaultProps = {
+  goBackPath: null,
   player: {}
 };
 
