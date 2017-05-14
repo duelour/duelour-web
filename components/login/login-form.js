@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Alert,
   Button,
@@ -184,8 +185,8 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  onSubmit: React.PropTypes.func.isRequired,
-  error: React.PropTypes.object
+  onSubmit: PropTypes.func.isRequired,
+  error: PropTypes.object
 };
 
 LoginForm.defaultProps = {

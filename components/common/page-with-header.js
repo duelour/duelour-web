@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { getPlayerInStorage } from '../../lib/data/players';
 import { signOut } from '../../lib/data/user';
 import Page from '../../document/page';
@@ -36,9 +37,9 @@ class PageWithHeader extends React.Component {
 }
 
 PageWithHeader.propTypes = {
-  children: React.PropTypes.node.isRequired,
-  goBackPath: React.PropTypes.string,
-  title: React.PropTypes.object
+  children: PropTypes.node.isRequired,
+  goBackPath: PropTypes.string,
+  title: PropTypes.object
 };
 
 PageWithHeader.defaultProps = {

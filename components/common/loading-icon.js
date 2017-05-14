@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const LoadingIcon = ({ width, color }) => (
   <div className="loader loader--style3">
     <svg x="0px" y="0px" width={width} height={width} viewBox="0 0 50 50">
@@ -26,8 +28,8 @@ const LoadingIcon = ({ width, color }) => (
 );
 
 LoadingIcon.propTypes = {
-  color: React.PropTypes.string,
-  width: React.PropTypes.string
+  color: PropTypes.string,
+  width: PropTypes.string
 };
 
 LoadingIcon.defaultProps = {

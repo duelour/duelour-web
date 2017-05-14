@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Panel, Table, Popover, OverlayTrigger } from 'react-bootstrap';
 
 const PlayerScore = ({
@@ -105,13 +106,13 @@ const PlayerScore = ({
 };
 
 PlayerScore.propTypes = {
-  hasAccepted: React.PropTypes.bool.isRequired,
-  playerName: React.PropTypes.string.isRequired,
-  totalWins: React.PropTypes.number.isRequired,
-  totalLosses: React.PropTypes.number.isRequired,
-  totalDraws: React.PropTypes.number.isRequired,
-  totalScore: React.PropTypes.number.isRequired,
-  status: React.PropTypes.oneOf(['winning', 'losing', 'draw']).isRequired
+  hasAccepted: PropTypes.bool.isRequired,
+  playerName: PropTypes.string.isRequired,
+  totalWins: PropTypes.number.isRequired,
+  totalLosses: PropTypes.number.isRequired,
+  totalDraws: PropTypes.number.isRequired,
+  totalScore: PropTypes.number.isRequired,
+  status: PropTypes.oneOf(['winning', 'losing', 'draw']).isRequired
 };
 
 export default PlayerScore;

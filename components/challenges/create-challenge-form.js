@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Button,
   ControlLabel,
@@ -245,9 +246,9 @@ class CreateChallengeForm extends React.Component {
 }
 
 CreateChallengeForm.propTypes = {
-  myNormalizedDisplayName: React.PropTypes.string.isRequired,
-  onSubmit: React.PropTypes.func.isRequired,
-  onOpponentDisplayNameChange: React.PropTypes.func.isRequired
+  myNormalizedDisplayName: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onOpponentDisplayNameChange: PropTypes.func.isRequired
 };
 
 export default CreateChallengeForm;

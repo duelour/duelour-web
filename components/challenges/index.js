@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import getVal from 'lodash/get';
@@ -58,10 +59,10 @@ const Challenges = ({
 };
 
 Challenges.propTypes = {
-  challenges: React.PropTypes.object.isRequired,
-  onClickAcceptChallenge: React.PropTypes.func.isRequired,
-  onClickChallenge: React.PropTypes.func.isRequired,
-  player: React.PropTypes.object.isRequired
+  challenges: PropTypes.object.isRequired,
+  onClickAcceptChallenge: PropTypes.func.isRequired,
+  onClickChallenge: PropTypes.func.isRequired,
+  player: PropTypes.object.isRequired
 };
 
 export default Challenges;

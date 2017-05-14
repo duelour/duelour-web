@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import Link from 'next/link';
 import debounce from 'lodash/debounce';
@@ -78,7 +79,7 @@ class CreateChallenge extends React.Component {
 }
 
 CreateChallenge.propTypes = {
-  player: React.PropTypes.object.isRequired
+  player: PropTypes.object.isRequired
 };
 
 export default withFirebase(CreateChallenge, { isProtected: true });

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Row, Col, Well, OverlayTrigger, Popover } from 'react-bootstrap';
 import pull from 'lodash/pull';
 import LoadingIcon from '../common/loading-icon';
@@ -182,12 +183,12 @@ class ChallengesSection extends React.Component {
 }
 
 ChallengesSection.propTypes = {
-  challenges: React.PropTypes.array.isRequired,
-  onClickAcceptChallenge: React.PropTypes.func,
-  onClickChallenge: React.PropTypes.func,
-  player: React.PropTypes.object.isRequired,
-  title: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired
+  challenges: PropTypes.array.isRequired,
+  onClickAcceptChallenge: PropTypes.func,
+  onClickChallenge: PropTypes.func,
+  player: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 ChallengesSection.defaultProps = {

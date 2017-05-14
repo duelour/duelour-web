@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Row, Col, Label } from 'react-bootstrap';
 import withFirebase from '../lib/with-firebase';
@@ -117,7 +118,7 @@ class Challenges extends React.Component {
 }
 
 Challenges.propTypes = {
-  challenge: React.PropTypes.object
+  challenge: PropTypes.object
 };
 
 Challenges.defaultProps = {

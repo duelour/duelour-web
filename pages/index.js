@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import withFirebase from '../lib/with-firebase';
 import {
@@ -113,7 +114,7 @@ class Index extends React.Component {
 }
 
 Index.propTypes = {
-  player: React.PropTypes.object
+  player: PropTypes.object
 };
 
 Index.defaultProps = {

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Logo from './logo';
@@ -93,10 +94,10 @@ const Header = ({ player, goBackPath, onClickLogout, title }) => {
 };
 
 Header.propTypes = {
-  player: React.PropTypes.object,
-  goBackPath: React.PropTypes.string,
-  onClickLogout: React.PropTypes.func.isRequired,
-  title: React.PropTypes.object.isRequired
+  player: PropTypes.object,
+  goBackPath: PropTypes.string,
+  onClickLogout: PropTypes.func.isRequired,
+  title: PropTypes.object.isRequired
 };
 
 Header.defaultProps = {

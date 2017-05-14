@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import Router from 'next/router';
 import isEmpty from 'lodash/isEmpty';
@@ -72,7 +73,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  user: React.PropTypes.object
+  user: PropTypes.object
 };
 
 Login.defaultProps = {

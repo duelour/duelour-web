@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Logo = ({ imageWidth, fontSize }) => (
   <div className="center-align">
     <img src="/static/boxing.png" width={imageWidth} />
@@ -18,8 +20,8 @@ const Logo = ({ imageWidth, fontSize }) => (
 );
 
 Logo.propTypes = {
-  imageWidth: React.PropTypes.string,
-  fontSize: React.PropTypes.string
+  imageWidth: PropTypes.string,
+  fontSize: PropTypes.string
 };
 
 Logo.defaultProps = {
