@@ -1,36 +1,71 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Row, Col, Label } from 'react-bootstrap';
+import { acceptChallengeForPlayer } from '../lib/controllers/challenges';
 import withFirebase from '../lib/with-firebase';
-import { findChallengeByChallengeIdOnce } from '../lib/data/challenges';
+import { findChallengeByChallengeId } from '../lib/data/challenges';
+import Notification from '../components/common/notification';
+import LoadingIcon from '../components/common/loading-icon';
 import PageWithHeader from '../components/common/page-with-header';
 import PlayerScore from '../components/challenges/player-score';
 
 class Challenges extends React.Component {
-  static async getInitialProps({ query }) {
-    const snapshot = await findChallengeByChallengeIdOnce(query.key);
-    const challenge = snapshot.val();
-    return { challenge };
-  }
-
   constructor(props) {
     super(props);
-    this.state = { title: 'Challenge' };
+    this.state = {
+      title: 'Challenge',
+      players: {},
+      challengeKey: null,
+      status: null,
+      isFetching: true
+    };
+    this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this);
   }
 
   componentDidMount() {
-    const { challenge } = this.props;
-    const newTitle = challenge.displayName;
-    const status = challenge.status;
-    const playerKeys = Object.keys(challenge.players);
-    const player1 = challenge.players[playerKeys[0]];
-    const player2 = challenge.players[playerKeys[1]];
-    this.setState({ title: newTitle, player1, player2, status });
+    const { url: { query } } = this.props;
+
+    findChallengeByChallengeId(query.key, 'on', challengeSnapshot => {
+      const challenge = challengeSnapshot.val();
+      const newTitle = challenge.displayName;
+      const status = challenge.status;
+      this.setState({
+        challengeKey: challengeSnapshot.key,
+        title: newTitle,
+        players: challenge.players,
+        status,
+        isFetching: false
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    const { url: { query } } = this.props;
+
+    findChallengeByChallengeId(query.key, 'off');
+  }
+
+  async handleAcceptChallenge() {
+    const { player } = this.props;
+    const { challengeKey } = this.state;
+    try {
+      await acceptChallengeForPlayer(challengeKey, player.key);
+      return this.notification.success('GAME ON! good luck! 🔥🔥');
+    } catch (err) {
+      return this.notification.error(
+        "Error! Can't accept that challenge right now"
+      );
+    }
   }
 
   render() {
-    const { title, player1, player2, status } = this.state;
+    const { title, players, status, isFetching } = this.state;
+    const { player } = this.props;
+    const challengePlayer = players[player.key] || {};
 
+    const playerKeys = Object.keys(players);
+    const player1 = players[playerKeys[0]];
+    const player2 = players[playerKeys[1]];
     let player1Status = 'draw';
     let player2Status = 'draw';
     if (player1 && player2) {
@@ -43,6 +78,13 @@ class Challenges extends React.Component {
       }
     }
 
+    if (isFetching) {
+      return (
+        <div style={{ textAlign: 'center', marginTop: '70px' }}>
+          <LoadingIcon color="#ed5f59" width="100" />
+        </div>
+      );
+    }
     return (
       <PageWithHeader
         title={
@@ -56,10 +98,24 @@ class Challenges extends React.Component {
                 {status && status.toUpperCase()}
               </Label>
             </div>
+            {!challengePlayer.hasPlayerAccepted &&
+              <div>
+                <a
+                  className="accept-challenge"
+                  onClick={this.handleAcceptChallenge}
+                >
+                  Accept challenge...
+                </a>
+              </div>}
           </div>
         }
         goBackPath="/"
       >
+        <Notification
+          ref={notification => {
+            this.notification = notification;
+          }}
+        />
         <Link href="/">
           <a className="go-back hidden-xs">
             <i className="material-icons big-ass-icon">chevron_left</i>
@@ -98,6 +154,9 @@ class Challenges extends React.Component {
           h3 {
             margin-top: 5px !important;
           }
+          .accept-challenge {
+            font-size: 24px !important;
+          }
         `}</style>
         <style jsx global>{`
           .status-label {
@@ -118,11 +177,13 @@ class Challenges extends React.Component {
 }
 
 Challenges.propTypes = {
-  challenge: PropTypes.object
+  url: PropTypes.object,
+  player: PropTypes.object
 };
 
 Challenges.defaultProps = {
-  challenge: {}
+  url: {},
+  player: {}
 };
 
 export default withFirebase(Challenges, { isProtected: true });
