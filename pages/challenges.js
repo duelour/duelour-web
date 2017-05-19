@@ -34,7 +34,8 @@ class Challenges extends React.Component {
         title: newTitle,
         players: challenge.players,
         status,
-        isFetching: false
+        isFetching: false,
+        isAccepting: false
       });
     });
   }
@@ -48,18 +49,22 @@ class Challenges extends React.Component {
   async handleAcceptChallenge() {
     const { player } = this.props;
     const { challengeKey } = this.state;
+
+    this.setState({ isAccepting: true });
     try {
       await acceptChallengeForPlayer(challengeKey, player.key);
+      this.setState({ isAccepting: false });
       return this.notification.success('GAME ON! good luck! 🔥🔥');
     } catch (err) {
+      this.setState({ isAccepting: false });
       return this.notification.error(
-        "Error! Can't accept that challenge right now"
+        "Error! Can't accept this challenge right now"
       );
     }
   }
 
   render() {
-    const { title, players, status, isFetching } = this.state;
+    const { title, players, status, isFetching, isAccepting } = this.state;
     const { player } = this.props;
     const challengePlayer = players[player.key] || {};
 
@@ -98,14 +103,20 @@ class Challenges extends React.Component {
                 {status && status.toUpperCase()}
               </Label>
             </div>
+            {challengePlayer.hasPlayerAccepted &&
+              <div className="action">
+                <a>Add draw</a>
+              </div>}
             {!challengePlayer.hasPlayerAccepted &&
               <div>
-                <a
-                  className="accept-challenge"
-                  onClick={this.handleAcceptChallenge}
-                >
-                  Accept challenge...
-                </a>
+                {isAccepting
+                  ? <LoadingIcon color="#ed5f59" width="30" />
+                  : <a
+                      className="accept-challenge"
+                      onClick={this.handleAcceptChallenge}
+                    >
+                      Accept challenge...
+                    </a>}
               </div>}
           </div>
         }
@@ -125,6 +136,7 @@ class Challenges extends React.Component {
           <Col md={5} className="text-center">
             {player1 &&
               <PlayerScore
+                enableAddWin={challengePlayer.hasPlayerAccepted}
                 hasAccepted={player1.hasPlayerAccepted}
                 playerName={player1.displayName}
                 totalWins={player1.totalWins}
@@ -140,6 +152,7 @@ class Challenges extends React.Component {
           <Col md={5} className="text-center">
             {player2 &&
               <PlayerScore
+                enableAddWin={challengePlayer.hasPlayerAccepted}
                 hasAccepted={player2.hasPlayerAccepted}
                 playerName={player2.displayName}
                 totalWins={player2.totalWins}
@@ -156,6 +169,11 @@ class Challenges extends React.Component {
           }
           .accept-challenge {
             font-size: 24px !important;
+          }
+          .action {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: 300 !important;
           }
         `}</style>
         <style jsx global>{`

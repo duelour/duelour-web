@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Panel, Table, Popover, OverlayTrigger } from 'react-bootstrap';
 
 const PlayerScore = ({
+  enableAddWin,
   hasAccepted,
   playerName,
   totalWins,
@@ -62,7 +63,13 @@ const PlayerScore = ({
           </Table>
         }
       >
-        <h1 className={textClass}>{totalScore}</h1>
+        {enableAddWin &&
+          <div className="action">
+            <a>Add win</a>
+          </div>}
+        <h1 className={textClass}>
+          {totalScore}
+        </h1>
       </Panel>
       <style jsx>{`
         h1 {
@@ -95,10 +102,18 @@ const PlayerScore = ({
           margin-left: 5px;
           margin-top: 6px;
         }
+        .action {
+          position: absolute;
+          font-size: 20px;
+        }
       `}</style>
       <style jsx global>{`
         .panel-title {
           font-size: 30px !important;
+        }
+        .panel-body {
+          display: flex;
+          justify-content: center;
         }
       `}</style>
     </div>
@@ -106,6 +121,7 @@ const PlayerScore = ({
 };
 
 PlayerScore.propTypes = {
+  enableAddWin: PropTypes.bool.isRequired,
   hasAccepted: PropTypes.bool.isRequired,
   playerName: PropTypes.string.isRequired,
   totalWins: PropTypes.number.isRequired,

@@ -114,3 +114,9 @@ a {
   background-color: #2ecc71 !important;
   border-color: #2ecc71 !important;
 }
+
+.btn-o.btn-success {
+  background-color: transparent !important;
+  color: #2ecc71 !important;
+  border-color: #2ecc71 !important;
+}
